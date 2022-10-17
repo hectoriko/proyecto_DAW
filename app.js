@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
+const mongoConnection = 'mongodb+srv://sudokle:IFPsudokle@cluster0.nrrxukw.mongodb.net/sudokle'
 
 // Escumchamos peticiones locales
 app.listen(3000, () => {
@@ -8,7 +9,7 @@ app.listen(3000, () => {
 })
 
 // Nos connectamos a la bbdd
-mongoose.connect('mongodb://localhost:27017/sudoku', { 
+mongoose.connect(mongoConnection, { 
         useNewUrlParser: true,
         useUnifiedTopology: true
     })
