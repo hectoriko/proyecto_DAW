@@ -1,10 +1,17 @@
+/*
+ * Este script nos permite popular la base de datos MongoDB Atlas con 48 puzles
+ * de diferentes dificultades.
+ */
+// TODO: Pasar cantidad de puzles a generar como argumento al script.
 const sudoku = require('sudokutoolcollection');
 const mongoose = require('mongoose');
-const { puzzleSchema } = require('../models/Sudoku.js')
-const mongoConnection = 'mongodb+srv://sudokle:IFPsudokle@cluster0.nrrxukw.mongodb.net/sudokle'
+const dbConfig = require('../configs/db.config.js');
+const { puzzleSchema } = require('../models/Sudoku.js');
+
+const dburl = dbConfig.url;
 
 // Nos conectamos a la bbdd
-mongoose.connect(mongoConnection, { 
+mongoose.connect(dburl, { 
         useNewUrlParser: true,
         useUnifiedTopology: true
     })
@@ -16,11 +23,11 @@ mongoose.connect(mongoConnection, {
         console.log(err);
     })
 
-// creamos el tipo Puzzle
+// Creamos el tipo/objeto/clase Puzzle (No lo tengo muy claro la verdad)
 const Puzzle = mongoose.model('Puzzle', puzzleSchema);
 
 /*
- * Esta función nos devuelve un objeto `Puzzle'.
+ * Esta función nos devuelve un objeto de tipo `Puzzle'.
  * Para ver `level's válidos, referirte a la página de sudokutoolcollection:
  * https://www.npmjs.com/package/sudokutoolcollection
  */
@@ -31,6 +38,7 @@ function createPuzzle(level) {
     return puzzle;
 }
 
+// Esta función guarda un objeto de "tipo" `Puzzle' en la base de datos.
 function addPuzzleToDB(puzzle) {
     puzzle.save();
 }
