@@ -1,6 +1,6 @@
 const sudoku = require('sudokutoolcollection');
 const mongoose = require('mongoose');
-const { puzzleSchema } = require('../model/Sudoku.js')
+const { puzzleSchema } = require('../models/Sudoku.js')
 const mongoConnection = 'mongodb+srv://sudokle:IFPsudokle@cluster0.nrrxukw.mongodb.net/sudokle'
 
 // Nos conectamos a la bbdd
