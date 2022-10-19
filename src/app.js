@@ -1,7 +1,12 @@
 const express = require('express');
-const app = express();
 const mongoose = require('mongoose');
-const mongoConnection = 'mongodb+srv://sudokle:IFPsudokle@cluster0.nrrxukw.mongodb.net/sudokle'
+const routes = require('./routes/db.route');
+const dbconfig = require('./configs/db.config');
+const app = express();
+const dburl = dbconfig.url;
+
+// Utilizamos las rutas de ./routes/db.route.js
+app.use('/api', routes);
 
 // Escumchamos peticiones locales
 app.listen(3000, () => {
@@ -9,7 +14,7 @@ app.listen(3000, () => {
 })
 
 // Nos connectamos a la bbdd
-mongoose.connect(mongoConnection, { 
+mongoose.connect(dburl, { 
         useNewUrlParser: true,
         useUnifiedTopology: true
     })

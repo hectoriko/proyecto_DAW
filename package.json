@@ -5,8 +5,9 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "populatedb": "node populate/populate.js && echo \"48 sudoku puzzles of various difficutlies added to database.\" && exit 1",
-    "serve": "browser-sync start -f app.js"
+    "populatedb": "node src/scripts/populate.js && echo \"48 sudoku puzzles of various difficutlies added to database.\" && exit 1",
+    "serve": "browser-sync start -f app.js",
+    "start": "nodemon src/app.js"
   },
   "repository": {
     "type": "git",
@@ -22,6 +23,7 @@
     "browser-sync": "^2.27.10",
     "express": "^4.18.2",
     "mongoose": "^6.6.5",
+    "nodemon": "^2.0.20",
     "sudokutoolcollection": "^1.1.3"
   },
   "comments": {
