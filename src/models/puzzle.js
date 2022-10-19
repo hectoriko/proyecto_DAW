@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 /*
  * El formato de los puzles que guarda la base de datos, y el que manda la API.
@@ -18,6 +18,4 @@ const puzzleSchema = mongoose.Schema({
     }
 });
 
-// {Por ahora} lo único que necesita este modulo es populate/populate.js, el
-// script que popula la base de datos, lo cual no se hace frequentemente.
-module.exports = { puzzleSchema };
+module.exports = mongoose.model('Puzzle', puzzleSchema);

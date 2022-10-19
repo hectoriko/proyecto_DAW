@@ -1,11 +1,11 @@
 const express = require('express');
-const app = express();
 const mongoose = require('mongoose');
-const routes = require('./routes/routes');
+const routes = require('./routes/db.route');
 const dbconfig = require('./configs/db.config');
+const app = express();
 const dburl = dbconfig.url;
 
-// Utilizamos las rutas de ./routes/routes.js
+// Utilizamos las rutas de ./routes/db.route.js
 app.use('/api', routes);
 
 // Escumchamos peticiones locales

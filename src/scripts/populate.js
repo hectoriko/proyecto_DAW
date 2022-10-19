@@ -6,11 +6,16 @@
 const sudoku = require('sudokutoolcollection');
 const mongoose = require('mongoose');
 const dbConfig = require('../configs/db.config.js');
-const { puzzleSchema } = require('../models/Sudoku.js');
+const Puzzle = require('../models/puzzle.js')
 
 const dburl = dbConfig.url;
 
-// Nos conectamos a la bbdd
+/*
+ * Nos conectamos a MongoDB Atlas. Esta conexión es independiente de la que
+ * hacemos en /src/app.js, ya que:
+ * 1) No requeremos la principal para ejecutar este script.
+ * 2) Es puntual y nos desconectamos al final del script.
+ */
 mongoose.connect(dburl, { 
         useNewUrlParser: true,
         useUnifiedTopology: true
@@ -22,9 +27,6 @@ mongoose.connect(dburl, {
         console.log('Error connecting to sudoku database >:');
         console.log(err);
     })
-
-// Creamos el tipo/objeto/clase Puzzle (No lo tengo muy claro la verdad)
-const Puzzle = mongoose.model('Puzzle', puzzleSchema);
 
 /*
  * Esta función nos devuelve un objeto de tipo `Puzzle'.
@@ -38,16 +40,21 @@ function createPuzzle(level) {
     return puzzle;
 }
 
-// Esta función guarda un objeto de "tipo" `Puzzle' en la base de datos.
+/* Esta función guarda un objeto de "tipo" `Puzzle' en la base de datos. */
+// TODO añadir control de errores.
 function addPuzzleToDB(puzzle) {
     puzzle.save();
 }
 
 
-// Creamos 16 puzzles difíciles, 16 medios y 16 fáciles. ¿Porqué 16? Porqué no.
+/* Creamos 16 puzzles difíciles, 16 medios y 16 fáciles. ¿Porqué 16? Porqué no. */
 for (let i = 0; i < 16; i++) {
     addPuzzleToDB(createPuzzle("hard"));
     addPuzzleToDB(createPuzzle("medium"));
     addPuzzleToDB(createPuzzle("easy"));
     console.log('Has creado tres puzles de varias dificultades.')
 }
+
+// ¿Si ejecutamos este script se cerrará la conexión de /src/app.js si está
+// abierta? TODO Responder y modificar.
+mongoose.connection.close();
