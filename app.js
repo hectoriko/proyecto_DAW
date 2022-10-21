@@ -1,20 +1,24 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const routes = require('./routes/db.route');
-const dbconfig = require('./configs/db.config');
+const db_routes = require('./routes/db.routes');
+const db_configs = require('./configs/db.configs');
+const index_routes = require('./routes/index.routes')
 const app = express();
-const dburl = dbconfig.url;
+const db_url = db_configs.url;
 
-// Utilizamos las rutas de ./routes/db.route.js
-app.use('/api', routes);
+/* Utilizamos las rutas de ./routes/db.routes.js */
+app.use('/api', db_routes);
 
-// Escumchamos peticiones locales
+/* Utilizamos las rutas de ./routes/index.routes.js */
+app.use('/', index_routes);
+
+/* Escumchamos peticiones locales */
 app.listen(3000, () => {
     console.log('Server listening on 3000');
 })
 
-// Nos connectamos a la bbdd
-mongoose.connect(dburl, { 
+/* Nos connectamos a la bbdd */
+mongoose.connect(db_url, { 
         useNewUrlParser: true,
         useUnifiedTopology: true
     })
@@ -24,5 +28,4 @@ mongoose.connect(dburl, {
     .catch((err) => {
         console.log('Error connecting to sudoku database >:');
         console.log(err);
-    })
-
+    });
