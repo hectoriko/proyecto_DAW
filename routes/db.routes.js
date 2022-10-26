@@ -9,21 +9,20 @@ module.exports = router;
 
 // Por ahora solo necesitamos GET puzles, dejo el resto comentadas como ejemplos.
 
-/* GET puzzle aleatorio de nivel "hard" */
-// TODO poder insertar nivel requerido como argumento.
 // Todavía no entiendo que hace exactamente async y await, pero son necesarios
 // para que funcione el codigo 😅. Si no me da un error de nosequé circular
 // json.
-router.get('/getRandomHard', (req, res) => {
+router.get('/getRandom/:level', (req, res) => {
     try {
-        Puzzle.countDocuments({level: "hard"}).exec(function (err, count) {
+        const level = req.params.level;
+        Puzzle.countDocuments({level: level}).exec(function (err, count) {
             const random = Math.floor(Math.random() * count);
-            Puzzle.findOne({level: "hard"}).skip(random).exec( function (err, puzzle) {
-                res.json(puzzle)
+            Puzzle.findOne({level: level}).skip(random).exec(function (err, puzzle) {
+                res.json(puzzle);
             });
         });
     } catch(err) {
-        res.status(500).json({message: err.message})
+        res.status(500).json({message: err.message});
     }
 });
 
@@ -31,9 +30,9 @@ router.get('/getRandomHard', (req, res) => {
 router.get('/getAll', async (req, res) => {
     try {
         const puzzles = await Puzzle.find();
-        res.json(puzzles)
+        res.json(puzzles);
     } catch(err) {
-        res.status(500).json({message: err.message})
+        res.status(500).json({message: err.message});
     }
 });
 
