@@ -14,12 +14,14 @@ module.exports = router;
 // Todavía no entiendo que hace exactamente async y await, pero son necesarios
 // para que funcione el codigo 😅. Si no me da un error de nosequé circular
 // json.
-router.get('/getRandomHard', async (req, res) => {
-    const count = Puzzle.estimatedDocumentCount();
-    const random = Math.floor(Math.random() * count);
+router.get('/getRandomHard', (req, res) => {
     try {
-        const data = await Puzzle.findOne({level: "hard"}).skip(random);
-        res.json(data)
+        Puzzle.countDocuments({level: "hard"}).exec(function (err, count) {
+            const random = Math.floor(Math.random() * count);
+            Puzzle.findOne({level: "hard"}).skip(random).exec( function (err, puzzle) {
+                res.json(puzzle)
+            });
+        });
     } catch(err) {
         res.status(500).json({message: err.message})
     }
