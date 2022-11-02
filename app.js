@@ -17,6 +17,10 @@ app.listen(3000, () => {
     console.log('Server listening on 3000');
 })
 
+
+// Conectamos hoja de estilos
+app.use(express.static(__dirname + '/public/'));
+
 /* Nos connectamos a la bbdd */
 mongoose.connect(db_url, { 
         useNewUrlParser: true,
@@ -29,3 +33,5 @@ mongoose.connect(db_url, {
         console.log('Error connecting to sudoku database >:');
         console.log(err);
     });
+
+
