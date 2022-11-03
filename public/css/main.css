@@ -85,7 +85,7 @@ footer {
 			"header"
 			"nav"
 			"content"
-			"side"
+			"side
 			"footer";
 
 		grid-template-columns: 1fr;
@@ -106,6 +106,7 @@ footer {
 table {
 	border-collapse: collapse;
 	font-family: Calibri, sans-serif;
+	margin-bottom: 20px;
 }
 
 colgroup,
@@ -119,4 +120,15 @@ td {
 	width: 1.4em;
 	text-align: center;
 	padding: 0;
+}
+
+.button-lvl {
+	border: 0;
+	outline: none;
+	background-color: #54bdc1;
+	border-radius: 5px;
+	padding: 10px 20px;
+	color: white;
+	font-family: monospace;
+	cursor: pointer;
 }
