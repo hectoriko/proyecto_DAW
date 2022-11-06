@@ -12,12 +12,12 @@ module.exports = router;
  * /api/getRandom/medium
  * /api/getRandom/easy
  */
-router.get('/getRandom/:level', (req, res) => {
+router.get('/getRandom/:level', async (req, res) => {
     try {
         const level = req.params.level;
-        Puzzle.countDocuments({level: level}).exec(function (err, count) {
+        await Puzzle.countDocuments({level: level}).exec((err, count) => {
             const random = Math.floor(Math.random() * count);
-            Puzzle.findOne({level: level}).skip(random).exec(function (err, puzzle) {
+            Puzzle.findOne({level: level}).skip(random).exec((err, puzzle) => {
                 res.json(puzzle);
             });
         });
