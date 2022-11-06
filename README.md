@@ -15,3 +15,10 @@
           '  '--'    ==`-'==        '--'  '
 
 ```
+
+### Instalación de entorno de desarrollo:
+
+1. `git clone` este repositorio
+2. `cd` a la carpeta que acabas de crear
+3. ejecuta `npm i`. Te instalarará todas las dependencias de desarrollo.
+4. ejecuta `npm run env`. Te preguntara tu nombre de usuario y contraseña para conectarte a la BBDD.
