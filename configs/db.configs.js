@@ -1,8 +1,10 @@
 /* 
  * Configuración para la conexión a MongoDB Atlas.
  */
-const user = "sudokle";
-const pass = "IFPsudokle";
+require('dotenv').config()
+console.log(process.env)
+const user = process.env.ATLAS_USER;
+const pass = process.env.ATLAS_PASS;
 const bbdd = "sudokle";
 const url = `mongodb+srv://${user}:${pass}@cluster0.nrrxukw.mongodb.net/${bbdd}`;
 
