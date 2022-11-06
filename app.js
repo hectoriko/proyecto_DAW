@@ -2,15 +2,15 @@ const express = require('express');
 const mongoose = require('mongoose');
 const db_routes = require('./routes/db.routes');
 const db_configs = require('./configs/db.configs');
-const index_routes = require('./routes/index.routes')
+const views_routes = require('./routes/views.routes')
 const app = express();
 const db_url = db_configs.url;
 
 /* Utilizamos las rutas de ./routes/db.routes.js */
 app.use('/api', db_routes);
 
-/* Utilizamos las rutas de ./routes/index.routes.js */
-app.use('/', index_routes);
+/* Utilizamos las rutas de ./routes/views.routes.js */
+app.use('/', views_routes);
 
 /* Escuchamos peticiones locales */
 app.listen(3000, () => {
