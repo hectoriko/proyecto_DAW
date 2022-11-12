@@ -3,8 +3,13 @@ const mongoose = require('mongoose');
 const db_routes = require('./routes/db.routes');
 const db_configs = require('./configs/db.configs');
 const views_routes = require('./routes/views.routes')
+const favicon = require('serve-favicon');
+const path = require('path');
 const app = express();
 const db_url = db_configs.url;
+
+// Cargamos favicon
+app.use(favicon(path.join(__dirname, 'public/favicon', 'favicon.ico')))
 
 /* Utilizamos las rutas de ./routes/db.routes.js */
 app.use('/api', db_routes);
