@@ -11,21 +11,41 @@ function callApi(level) {
    fetch(`/api/getRandom/${level}`)
    .then((response) => response.json())
    .then((data) => {
-      const test = document.getElementById("test");
+      const sudoku = document.getElementById("sudoku");
+      
+      let sudokuAsString = data.cells;
+      let sudokuAsArray = stringToArray(sudokuAsString)
+      
+      // const test = document.getElementById("test");
+      // const template = /*html*/ `
+      //    <p>ID ${data._id}</p>
+      //    <p>Level ${data.level}</p>
+      //    <p>Cells: ${data.cells}</p>
+      //    `;
+      // test.innerHTML = template;
 
-      // let sudokuTable = data.cells;
-      // let sudokuTemplate = '<caption>Sudoku of the day</caption><colgroup><col><col><col>      <colgroup><col><col><col><colgroup><col><col><col>';
+      let sudokuTemplate = /*html*/ `
+      <table>
+      <caption>
+         <span>Sudoku</span> <br />
+         <span>Level: ${data.level}</span> <br />
+         <span>ID: ${data._id}</span>
+      </caption>
+      <colgroup><col><col><col>
+      <colgroup><col><col><col>
+      <colgroup><col><col><col>`;
 
-      // sudokuTable.forEach(number, index) {
+      sudokuAsArray.forEach(function(row, i) {
+         if (i == 0 || i == 3 || i == 6) sudokuTemplate += /*html*/`<tbody>`;
+         sudokuTemplate += /*html*/ `<tr>`;
+         row.forEach(cell => {
+            sudokuTemplate += /*html*/ `<td>${parseCell(cell)}`;
+         })
+      })
+      sudokuTemplate += /*html*/ `</table>`;
 
-      // };
-
-      const template = /*html*/ `
-         <p>ID ${data._id}</p>
-         <p>Level ${data.level}</p>
-         <p>Cells: ${data.cells}</p>
-         `;
-      test.innerHTML = template;
+      sudoku.innerHTML = '';
+      sudoku.innerHTML = sudokuTemplate;
    })
    .catch(e => console.error(e));
 }
@@ -42,4 +62,8 @@ function stringToArray(s) {
         }
     }
     return rows;
+}
+
+function parseCell(cell) {
+   return cell === '.' ? '' : cell;
 }
