@@ -1,3 +1,6 @@
+/* 
+ * Esquema de los puzles en la base de datos.
+ */
 const mongoose = require('mongoose');
 
 /*

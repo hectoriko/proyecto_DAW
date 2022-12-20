@@ -50,13 +50,14 @@ function callApi(level) {
    .catch(e => console.error(e));
 }
 
+/* Convertir cells en formato cadena a matriz */
 function stringToArray(s) {
     const rows = [];
     const stringArray = s.split('');
     let row = [];
     for (const cell in stringArray) {
         row.push(stringArray[cell]);
-        if (parseInt(cell) % 9 == 8) {
+        if (parseInt(cell) % 9 === 8) {
             rows.push(row);
             row = [];
         }

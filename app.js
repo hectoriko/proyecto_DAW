@@ -17,12 +17,12 @@ app.use('/api', db_routes);
 /* Utilizamos las rutas de ./routes/views.routes.js */
 app.use('/', views_routes);
 
-/* Escuchamos peticiones locales */
+/* Escuchamos peticiones */
 app.listen(3000, () => {
     console.log('Server listening on 3000');
 })
 
-// Conectamos CSS, JS e Imagenes
+/* Conectamos CSS, JS e Imagenes */
 // app.use(express.static('/public'));
 app.use("/css", express.static(__dirname + "/public/css"));
 app.use("/js", express.static(__dirname + "/public/js"));
@@ -40,5 +40,3 @@ mongoose.connect(db_url, {
         console.log('Error connecting to sudoku database >:');
         console.log(err);
     });
-
-

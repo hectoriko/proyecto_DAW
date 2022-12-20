@@ -2,7 +2,6 @@
  * Este script nos permite popular la base de datos MongoDB Atlas con 48 puzles
  * de diferentes dificultades.
  */
-// TODO: Pasar cantidad de puzles a generar como argumento al script.
 const sudoku = require('sudokutoolcollection');
 const mongoose = require('mongoose');
 const dbConfig = require('../configs/db.config.js');
@@ -41,9 +40,11 @@ function createPuzzle(level) {
 }
 
 /* Esta función guarda un objeto de "tipo" `Puzzle' en la base de datos. */
-// TODO añadir control de errores.
 function addPuzzleToDB(puzzle) {
-    puzzle.save();
+    puzzle.save()
+    .catch((err) => {
+      console.log(err);
+    });
 }
 
 
@@ -55,6 +56,4 @@ for (let i = 0; i < 16; i++) {
     console.log('Has creado tres puzles de varias dificultades.')
 }
 
-// ¿Si ejecutamos este script se cerrará la conexión de /src/app.js si está
-// abierta? TODO Responder y modificar.
 mongoose.connection.close();
