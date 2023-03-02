@@ -6,19 +6,40 @@
 ( |___|   |__| |_____|___  |_____|____||____|_____|____|_____/|___|___|________| )
 (                    |_____|                     |______|                        )
  -------------------------------------------------------------------------------- 
-     o
-      o
-          oO)-.                       .-(Oo
-         /__  _\                     /_  __\
-         \  \(  |     ()~()         |  )/  /
-          \__|\ |    (-___-)        | /|__/
-          '  '--'    ==`-'==        '--'  '
 
 ```
+###### Proyecto Daw -- Equipo 14
+
+### Requisistos:
+
+- npm
+- git
 
 ### Instalación de entorno de desarrollo:
 
-1. `git clone` este repositorio
-2. `cd` a la carpeta que acabas de crear
-3. ejecuta `npm i`. Te instalarará todas las dependencias de desarrollo.
-4. ejecuta `npm run env`. Te preguntara tu nombre de usuario y contraseña para conectarte a la BBDD.
+1. Clonamos el repositorio y entramos en la carpeta del proyecto:
+   ```sh
+   $ git clone https://github.com/hektoriko/proyecto_DAW
+   $ cd proyecto_DAW
+   ```
+1. Instalamos las dependencias de desarrollo:
+   ```sh
+   $ npm install
+   ```
+1. Ejecutamos el script para meter nuestro usuario y contraseña de ATLAS
+   ```sh
+   $ npm run env
+   ```
+   Nos creara un archivo `.env` con los datos requeridos por la base de datos.
+
+### Comandos:
+
+- Instanciar el servidor localmente:
+   ```sh
+   $ npm start
+   ```
+- Popular la base de datos con puzles:
+
+   ```sh
+   $ npm run populatedb
+   ```

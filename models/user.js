@@ -1,8 +1,9 @@
+/*
+ * Esquema de usuarios en la base de datos.
+ */
 const mongoose = require('mongoose');
 
-/**
- * El modelo de usuarios
- */
+/* El modelo de usuarios */
 const userSchema = mongoose.Schema({
   user_name: {
     type: String,
@@ -14,7 +15,7 @@ const userSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  soved_puzzles: {
+  solved_puzzles: {
     type: Array
   },
   full_name: {
