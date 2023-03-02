@@ -1,0 +1,27 @@
+@import './_variables.less';
+@import './_mixins.less';
+
+.sudo-tips {
+   list-style-type: none;
+   counter-reset: css-counter 0; 
+}
+
+.sudo-tip {
+   &:not(:last-child) {
+      margin-bottom: 30px;
+   }
+
+   &__title {
+      .sudo-h2();
+      counter-increment: css-counter 1; 
+
+      &:before {
+         color: @main-color-dark;
+         content: counter(css-counter) " - "; 
+      }
+   }
+
+   &__text {
+      .sudo-p();
+   }
+}

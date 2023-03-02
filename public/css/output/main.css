@@ -1,0 +1,223 @@
+.sudo-sudoku {
+  min-height: 300px;
+  min-width: 300px;
+  background-color: lightgrey;
+}
+table {
+  border-collapse: collapse;
+  font-family: Calibri, sans-serif;
+  margin-bottom: 20px;
+}
+colgroup,
+tbody {
+  border: solid medium;
+}
+td {
+  border: solid thin;
+  height: 1.4em;
+  width: 1.4em;
+  text-align: center;
+  padding: 0;
+}
+.sudo-header {
+  background-color: #308a96;
+  padding: 20px;
+  display: flex;
+  gap: 20px;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.sudo-header__logo-title {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+}
+.sudo-header__title {
+  font-size: 40px;
+}
+.sudo-header__logo {
+  width: 48px;
+  height: 48px;
+}
+.sudo-header__login {
+  margin-left: auto;
+}
+.color-box {
+  background-color: #d9f6fa;
+  padding: 20px;
+  border-radius: 25px;
+}
+.sudo-font-family {
+  font-family: Arial, Helvetica, sans-serif;
+}
+.sudo-h2 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  color: #308a96;
+  font-size: clamp(1.2rem, 2vw, 2rem);
+  margin-bottom: 10px;
+}
+.sudo-p {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #308a96;
+  color: #6C6C6C;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+}
+.sudo-middle {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+@media (min-width: 768px) {
+  .sudo-middle {
+    flex-direction: row;
+  }
+}
+.sudo-aside {
+  background-color: #d9f6fa;
+  padding: 20px;
+  border-radius: 25px;
+}
+.sudo-aside {
+  width: 20%;
+  min-width: 260px;
+}
+.sudo-aside__group:not(:last-child) {
+  margin-bottom: 40px;
+}
+.sudo-aside__group h2 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  color: #308a96;
+  font-size: clamp(1.2rem, 2vw, 2rem);
+  margin-bottom: 10px;
+}
+.sudo-aside__group ul li {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #308a96;
+  color: #6C6C6C;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  margin-bottom: 12px;
+}
+.sudo-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: #E2E8E9;
+}
+.button {
+  border: 0;
+  outline: none;
+  border-radius: 15px;
+  padding: 10px 20px;
+  font-family: monospace;
+  cursor: pointer;
+  animation: all 0.3s ease-in-out;
+}
+.button--filled {
+  background-color: #308a96;
+  color: white;
+}
+.button--bubble {
+  border: 1px solid #308a96;
+  background-color: transparent;
+  color: #308a96;
+}
+.button--bubble:hover {
+  background-color: #308a96;
+  color: white;
+}
+.sudo-tips {
+  list-style-type: none;
+  counter-reset: css-counter 0;
+}
+.sudo-tip:not(:last-child) {
+  margin-bottom: 30px;
+}
+.sudo-tip__title {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  color: #308a96;
+  font-size: clamp(1.2rem, 2vw, 2rem);
+  margin-bottom: 10px;
+  counter-increment: css-counter 1;
+}
+.sudo-tip__title:before {
+  color: #1e6770;
+  content: counter(css-counter) " - ";
+}
+.sudo-tip__text {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #308a96;
+  color: #6C6C6C;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+ul {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+.sudo-grid-container {
+  display: grid;
+  grid-template-rows: 100px 1fr 80px;
+  min-height: 100vh;
+}
+.sudo-container {
+  width: 100%;
+  margin: 0 auto;
+  max-width: 540px;
+  padding: 20px;
+}
+@media (min-width: 768px) {
+  .sudo-container {
+    padding: 50px 0;
+    max-width: 720px;
+  }
+}
+@media (min-width: 992px) {
+  .sudo-container {
+    max-width: 960px;
+  }
+}
+@media (min-width: 1200px) {
+  .sudo-container {
+    max-width: 1140px;
+  }
+}
+@media (min-width: 1400px) {
+  .sudo-container {
+    max-width: 1320px;
+  }
+}
+.sudo-ranking__user {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+}
+.sudo-ranking__posicion {
+  padding: 7px;
+  border-radius: 5px;
+  background-color: #E2E8E9;
+  color: #6C6C6C;
+  width: 22px;
+  height: 22px;
+}
+.sudo-ranking__nombre {
+  color: #6C6C6C;
+}
+.sudo-ranking__puntos {
+  color: #308a96;
+}

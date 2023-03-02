@@ -1,47 +1,76 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sudokle</title>
-    <link href="css/main.css" rel="stylesheet" type="text/css"> 
-    <script src="js/script.js" defer></script>
-  </head>
-  <body>
-    <div class="container">
-      <header>
-        <img src="img/SUDOKLE2.png" alt="Logo">
-        <h1>Sudokle</h1>
-      </header>
-      
-      <nav>
-        <ul>
-          <li><a href="/about">About</a></li>
-          <li>Home</li>
-          <li>Easy</li>
-          <li>Medium</li>
-          <li>Hard</li>
-        </ul>
-      </nav>
-      
-      <main>
-        <div id="sudoku">
-        </div>
-        
-        <button class="button-lvl" data-level="hard">Hard</button>
-        <button class="button-lvl" data-level="medium">Medium</button>
-        <button class="button-lvl" data-level="easy">Easy</button>
 
-        <div id="test"></div>
-      </main>
-    
-      <aside>
-      </aside>
-    
-      <footer>
-        © 2022 Sudokle       
-      </footer>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sudokle</title>
+  <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap" rel="stylesheet"> -->
+  <link href="css/output/main.css" rel="stylesheet" type="text/css">
+
+  <script src="js/script.js" defer></script>
+</head>
+
+<body>
+  <div class="sudo-grid-container">
+
+    <header class="sudo-header"></header>
+
+    <div class="sudo-container">
+      <div class="sudo-middle">
+
+        <nav class="sudo-aside" id="sudo-left-nav"></nav>
+
+        <main>
+          <div class="sudo-sudoku" id="sudoku"></div>
+
+          <!-- <button class="button-lvl" data-level="easy">Easy</button>
+          <button class="button-lvl" data-level="medium">Medium</button>
+          <button class="button-lvl" data-level="hard">Hard</button> -->
+
+          <div id="test"></div>
+        </main>
+
+        <aside class="sudo-aside">
+          <div class="sudo-aside__group">
+            <h2>Ranking</h2>
+            <ul class="sudo-ranking">
+              <li class="sudo-ranking__user">
+                <span class="sudo-ranking__posicion">1</span>
+                <span class="sudo-ranking__nombre">Usuario A</span>
+                <span class="sudo-ranking__puntos">2300 pts</span>
+              </li>
+              <li class="sudo-ranking__user">
+                <span class="sudo-ranking__posicion">2</span>
+                <span class="sudo-ranking__nombre">Usuario B</span>
+                <span class="sudo-ranking__puntos">1900 pts</span>
+              </li>
+              <li class="sudo-ranking__user">
+                <span class="sudo-ranking__posicion">3</span>
+                <span class="sudo-ranking__nombre">Usuario C</span>
+                <span class="sudo-ranking__puntos">400 pts</span>
+              </li>
+
+            </ul>
+          </div>
+          <div class="sudo-aside__group">
+            <h2>Amigos</h2>
+            <ul>
+              <li>
+                <span>👤</span>
+                <span class="nombre">Usuario A</span>
+              </li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+
     </div>
+    <footer class="sudo-footer"></footer>
+  </div>
+
 </body>
+
 </html>

@@ -1,0 +1,27 @@
+@import './_variables.less';
+
+.button {
+	border: 0;
+	outline: none;
+	border-radius: 15px;
+	padding: 10px 20px;
+	font-family: monospace;
+	cursor: pointer;
+	animation: all 0.3s ease-in-out;
+	
+	&--filled {
+		background-color: @main-color;
+		color: white;
+	}
+	
+	&--bubble {
+		border: 1px solid @main-color;
+		background-color: transparent;
+		color: @main-color;
+		
+		&:hover {
+			background-color: @main-color;
+			color: white;
+		}
+	}
+}

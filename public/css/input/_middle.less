@@ -1,0 +1,67 @@
+@import './_variables.less';
+@import './_mixins.less';
+
+.sudo-middle {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	// margin: 20px 0;
+	// padding: 20px;
+	
+	@media (min-width: @bp-md) {
+		// padding: 50px;
+		// margin: 50px 0;
+		flex-direction: row;
+	}
+}
+
+.sudo-aside {
+	.color-box();
+}
+
+.sudo-aside {
+	width: 20%;
+	min-width: 260px;
+
+	&__group {
+		&:not(:last-child) {
+			margin-bottom: 40px;
+		}
+
+		h2 {
+			.sudo-h2();
+		}
+		
+		ul {
+			li {
+				.sudo-p();
+				margin-bottom: 12px;
+			}
+		}
+	}
+}
+
+
+// @media (max-width: 768px) {
+// 	// .container {
+// 	// 	grid-template-areas:
+// 	// 		"header"
+// 	// 		"nav"
+// 	// 		"content"
+// 	// 		"side
+// 	// 		"footer";
+
+// 	// 	grid-template-columns: 1fr;
+// 	// 	grid-template-rows:
+// 	// 		auto /* Header */
+// 	// 		minmax(75px, auto) /* Nav */
+// 	// 		1fr /* Content */
+// 	// 		minmax(75px, auto) /* Sidebar */
+// 	// 		auto; /* Footer */
+// 	// }
+
+// 	nav,
+// 	aside {
+// 		margin: 0;
+// 	}
+// }

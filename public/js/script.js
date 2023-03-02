@@ -1,6 +1,6 @@
 console.log("If you can read this, the file has loaded")
 
-document.querySelectorAll('.button-lvl').forEach(button => {
+document.querySelectorAll('.js-button-lvl').forEach(button => {
    button.addEventListener('click', () => {
       const level = button.dataset.level;
       callApi(level)
@@ -11,6 +11,7 @@ function callApi(level) {
    fetch(`/api/getRandom/${level}`)
    .then((response) => response.json())
    .then((data) => {
+      console.log("🚀 - data:", data)
       const sudoku = document.getElementById("sudoku");
       
       let sudokuAsString = data.cells;
@@ -25,15 +26,16 @@ function callApi(level) {
       // test.innerHTML = template;
 
       let sudokuTemplate = /*html*/ `
-      <table>
-      <caption>
-         <span>Sudoku</span> <br />
-         <span>Level: ${data.level}</span> <br />
-         <span>ID: ${data._id}</span>
-      </caption>
-      <colgroup><col><col><col>
-      <colgroup><col><col><col>
-      <colgroup><col><col><col>`;
+         <table>
+            <caption>
+               <span>Sudoku</span> <br />
+               <span>Level: ${data.level}</span> <br />
+               <span>ID: ${data._id}</span>
+            </caption>
+            
+            <colgroup><col><col><col>
+            <colgroup><col><col><col>
+            <colgroup><col><col><col>`;
 
       sudokuAsArray.forEach(function(row, i) {
          if (i == 0 || i == 3 || i == 6) sudokuTemplate += /*html*/`<tbody>`;
@@ -67,3 +69,28 @@ function stringToArray(s) {
 function parseCell(cell) {
    return cell === '.' ? '' : cell;
 }
+
+
+fetch("./template-header")
+  .then(response => {
+    return response.text()
+  })
+  .then(data => {
+    document.querySelector("header").innerHTML = data;
+  });
+
+fetch("./template-footer")
+  .then(response => {
+    return response.text()
+  })
+  .then(data => {
+    document.querySelector("footer").innerHTML = data;
+  });
+
+fetch("./template-left-nav")
+  .then(response => {
+    return response.text()
+  })
+  .then(data => {
+    document.querySelector("#sudo-left-nav").innerHTML = data;
+  });
