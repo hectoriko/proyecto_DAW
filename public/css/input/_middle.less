@@ -41,6 +41,33 @@
 	}
 }
 
+.sudo-ranking {
+   &__user {
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+		align-items: center;
+		gap: 10px;
+	}
+
+   &__posicion {
+		padding: 7px;
+		border-radius: 5px;
+		background-color: @gray;
+		color: @gray-6c;
+		width: 22px;
+		height: 22px;
+	}
+	
+   &__nombre {
+		color: @gray-6c;
+	}
+
+   &__puntos {
+		color: @main-color;
+	}
+}
+
 
 // @media (max-width: 768px) {
 // 	// .container {

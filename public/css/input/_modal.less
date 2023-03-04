@@ -1,0 +1,74 @@
+@import './_variables.less';
+
+@blur: 5px;
+
+.sudo-modal {
+	display: none;
+	position: fixed;
+	z-index: 999;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	justify-content:center;
+	align-items:center;
+
+	&--active {
+		display: flex;
+	}
+
+	&__overlay {
+		width: 100%;
+		height: 100%;
+		background-color: rgba(255, 255, 255, 0.3);
+		backdrop-filter: blur(10px);
+		position: absolute;
+	}
+	
+	&__modal-wrapper {
+		.sudo-soft-shadow();
+		position: relative;
+		min-width: 280px;
+		// min-height: 300px;
+		border-radius: 20px;
+		background-color: white;
+		padding: 35px 25px;
+		
+	}
+
+	&__form {
+		display: flex;
+		flex-direction: column;
+		gap: 30px;
+	}
+
+	&__title {
+		.sudo-h3();
+		margin-bottom: 30px;
+	}
+
+	&__close {
+		position: absolute;
+		top: 15px;
+		right: 15px;
+		font-size: 22px;
+		font-weight: bolder;
+		color: @gray-6c;
+		cursor: pointer;
+
+		&:hover {
+			color: @main-color;
+		}
+	}
+
+	&__input {
+		border: 0;
+		outline: 0;
+		border-bottom: 1px solid @main-color;
+		padding: 5px;
+	}
+
+	&__button {}
+
+	&__input {}
+}

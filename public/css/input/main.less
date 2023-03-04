@@ -5,12 +5,20 @@
 @import './_middle.less';
 @import './_footer.less';
 @import './_button.less';
+@import './_modal.less';
 @import './_tips.less';
+@import './_tutoriales.less';
 
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+}
+
+body {
+	&.modal-open {
+		overflow: hidden;
+	}
 }
 
 ul {
@@ -50,34 +58,4 @@ a {
 	@media (min-width: @bp-xxl) {
 		max-width: 1320px;
 	};
-}
-
-// TODO: Move somewhere else
-.sudo-ranking {
-	
-   &__user {
-		display: flex;
-		flex-direction: row;
-		justify-content: flex-start;
-		align-items: center;
-		gap: 10px;
-	}
-
-   &__posicion {
-		padding: 7px;
-		border-radius: 5px;
-		background-color: @gray;
-		color: @gray-6c;
-		width: 22px;
-		height: 22px;
-	}
-	
-   &__nombre {
-		color: @gray-6c;
-		
-	}
-   &__puntos {
-
-		color: @main-color;
-	}
 }

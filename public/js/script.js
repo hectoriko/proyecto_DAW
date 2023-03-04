@@ -1,3 +1,10 @@
+import { addTemplate } from "./insert_templates.js";
+import { loadYoutubeTutorials } from "./youtube_tutorials.js";
+import { handleLogin } from "./login.js";
+
+// const addTemplate = require('./insert_templates.js');z
+// console.log("🚀 - addTemplate:", addTemplate)
+
 console.log("If you can read this, the file has loaded")
 
 document.querySelectorAll('.js-button-lvl').forEach(button => {
@@ -6,7 +13,6 @@ document.querySelectorAll('.js-button-lvl').forEach(button => {
       callApi(level)
    })
  })
-
 function callApi(level) {
    fetch(`/api/getRandom/${level}`)
    .then((response) => response.json())
@@ -40,9 +46,7 @@ function callApi(level) {
       sudokuAsArray.forEach(function(row, i) {
          if (i == 0 || i == 3 || i == 6) sudokuTemplate += /*html*/`<tbody>`;
          sudokuTemplate += /*html*/ `<tr>`;
-         row.forEach(cell => {
-            sudokuTemplate += /*html*/ `<td>${parseCell(cell)}`;
-         })
+         row.forEach(cell => sudokuTemplate += /*html*/ `<td>${parseCell(cell)}`)
       })
       sudokuTemplate += /*html*/ `</table>`;
 
@@ -71,27 +75,4 @@ function parseCell(cell) {
    return cell === '.' ? '' : cell;
 }
 
-
-fetch("./template-header")
-  .then(response => {
-    return response.text()
-  })
-  .then(data => {
-    document.querySelector("header").innerHTML = data;
-  });
-
-fetch("./template-footer")
-  .then(response => {
-    return response.text()
-  })
-  .then(data => {
-    document.querySelector("footer").innerHTML = data;
-  });
-
-fetch("./template-left-nav")
-  .then(response => {
-    return response.text()
-  })
-  .then(data => {
-    document.querySelector("#sudo-left-nav").innerHTML = data;
-  });
+ 

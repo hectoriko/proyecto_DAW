@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap" rel="stylesheet"> -->
   <link href="css/output/main.css" rel="stylesheet" type="text/css">
 
-  <script src="js/script.js" defer></script>
+  <script src="js/script.js" type="module" defer></script>
 </head>
 
 <body>
@@ -21,16 +21,14 @@
     <div class="sudo-container">
       <div class="sudo-middle">
 
-        <nav class="sudo-aside" id="sudo-left-nav"></nav>
+        <nav class="sudo-aside sudo-nav" id=""></nav>
 
         <main>
-          <div class="sudo-sudoku" id="sudoku"></div>
-
-          <!-- <button class="button-lvl" data-level="easy">Easy</button>
-          <button class="button-lvl" data-level="medium">Medium</button>
-          <button class="button-lvl" data-level="hard">Hard</button> -->
+          <div class="sudo-sudoku" id=""></div>
 
           <div id="test"></div>
+
+          <div id="js-sudo-test2"></div>
         </main>
 
         <aside class="sudo-aside">
@@ -69,6 +67,20 @@
 
     </div>
     <footer class="sudo-footer"></footer>
+  </div>
+
+  <div class="sudo-modal">
+    <div class="sudo-modal__overlay"></div>
+    <div class="sudo-modal__modal-wrapper">
+      <h2 class="sudo-modal__title">Login</h2>
+      <span class="sudo-modal__close js-close-login-modal">&times;</span>
+
+      <form class="sudo-modal__form" action="/login" method="post">
+        <input class="sudo-modal__input js-user" type="text" placeholder="Usuario" name="user_name">
+        <input class="sudo-modal__input js-password" type="password" placeholder="Contraseña" name="password_hash">
+        <input class="sudo-modal__button sudo-button sudo-button--filled js-send-login" type="submit" value="Login">
+      </form>
+    </div>
   </div>
 
 </body>
