@@ -7,18 +7,21 @@ import { handleLogin } from "./login.js";
 
 console.log("If you can read this, the file has loaded")
 
-document.querySelectorAll('.js-button-lvl').forEach(button => {
-   button.addEventListener('click', () => {
-      const level = button.dataset.level;
-      callApi(level)
-   })
- })
+setTimeout(function () {
+   document.querySelectorAll('.js-button-lvl').forEach(button => {
+      button.addEventListener('click', () => {
+         const level = button.dataset.level;
+         callApi(level)
+      })
+    })
+}, 2000)
+
 function callApi(level) {
    fetch(`/api/getRandom/${level}`)
    .then((response) => response.json())
    .then((data) => {
       console.log("🚀 - data:", data)
-      const sudoku = document.getElementById("sudoku");
+      const sudoku = document.querySelector(".sudo-sudoku");
       
       let sudokuAsString = data.cells;
       let sudokuAsArray = stringToArray(sudokuAsString)
