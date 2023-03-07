@@ -1,4 +1,4 @@
-```
+``
  ________________________________________________________________________________ 
 (  ______                               __              _____  _______ ________  )
 ( |   __ \.----.-----.--.--.-----.----.|  |_.-----.    |     \|   _   |  |  |  | )
@@ -7,39 +7,42 @@
 (                    |_____|                     |______|                        )
  -------------------------------------------------------------------------------- 
 
-```
+
 ###### Proyecto Daw -- Equipo 14
 
 ### Requisistos:
 
-- npm
-- git
+- Instalar "npm": https://www.npmjs.com/
+- Instalar "git": https://git-scm.com/
+- Estar registrado en Github para poder ver y clonar el repositorio: https://github.com
 
 ### Instalación de entorno de desarrollo:
 
-1. Clonamos el repositorio y entramos en la carpeta del proyecto:
-   ```sh
-   $ git clone https://github.com/hektoriko/proyecto_DAW
+1. Creamos una carpeta donde se clonará el repositorio. Abrimos el terminal Git CMD y nos colocamos en el directorio creado. 
+   
+   $ cd /ruta/carpeta
+
+   Clonamos el repositorio y entramos en la carpeta del proyecto:
+   
+   $ git clone https://github.com/hectoriko/proyecto_DAW
    $ cd proyecto_DAW
-   ```
-1. Instalamos las dependencias de desarrollo:
-   ```sh
+  
+2. Instalamos las dependencias de desarrollo:
+   
    $ npm install
-   ```
-1. Ejecutamos el script para meter nuestro usuario y contraseña de ATLAS
-   ```sh
+   
+3. Ejecutamos el script para meter nuestro usuario y contraseña de ATLAS. USER: Sudokle PASSWORD: IFPsudokle
+   
    $ npm run env
-   ```
+   
    Nos creara un archivo `.env` con los datos requeridos por la base de datos.
 
 ### Comandos:
 
-- Instanciar el servidor localmente:
-   ```sh
-   $ npm start
-   ```
-- Popular la base de datos con puzles:
+- Instanciar el servidor localmente. 
 
-   ```sh
-   $ npm run populatedb
-   ```
+   $ npm start
+
+- Abrir navegador e introducir la direccion:
+
+   localhost:3000
