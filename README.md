@@ -47,7 +47,7 @@
 
 ### Comandos:
 
-- Instanciar el servidor localmente. 
+- Instanciar el servidor localmente.
 
    ```sh
    $ npm start
@@ -56,3 +56,9 @@
 - Abrir navegador e introducir la direccion:
 
    localhost:3000
+
+- Ejecutar todos los tests:
+
+   ```sh
+   $ npm run test
+   ```

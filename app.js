@@ -8,13 +8,13 @@ const path = require('path');
 const app = express();
 const db_url = db_configs.url;
 
-// Cargamos favicon
+/* Cargamos favicon */
 app.use(favicon(path.join(__dirname, 'public/favicon', 'favicon.ico')))
 
-/* Utilizamos las rutas de ./routes/db.routes.js */
+/* Utilizamos las rutas de ./routes/db.routes.js: APIs */
 app.use('/api', db_routes);
 
-/* Utilizamos las rutas de ./routes/views.routes.js */
+/* Utilizamos las rutas de ./routes/views.routes.js: páginas */
 app.use('/', views_routes);
 
 /* Escuchamos peticiones */
@@ -29,7 +29,7 @@ app.use("/js", express.static(__dirname + "/public/js"));
 app.use("/img", express.static(__dirname + "/public/img"));
 
 /* Nos connectamos a la bbdd */
-mongoose.connect(db_url, { 
+mongoose.connect(db_url, {
         useNewUrlParser: true,
         useUnifiedTopology: true
     })
