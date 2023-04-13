@@ -8,7 +8,7 @@ module.exports = router;
 
 
 
-/* 
+/*
  * Esta ruta nos permite obtener de la BBDD un objeto puzzle del nivel pasado
  * como parametro, por ahora tenemos:
  * /api/getRandom/hard

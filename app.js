@@ -8,19 +8,19 @@ const path = require('path');
 const app = express();
 const db_url = db_configs.url;
 
-// Cargamos favicon
+/* Cargamos favicon */
 app.use(favicon(path.join(__dirname, 'public/favicon', 'favicon.ico')))
 
-/* Utilizamos las rutas de ./routes/db.routes.js */
+/* Utilizamos las rutas de ./routes/db.routes.js: APIs */
 app.use('/api', db_routes);
 
-/* Utilizamos las rutas de ./routes/views.routes.js */
+/* Utilizamos las rutas de ./routes/views.routes.js: páginas */
 app.use('/', views_routes);
 
-/* Escuchamos peticiones */
-app.listen(3000, () => {
-    console.log('Server listening on 3000');
-})
+// /* Escuchamos peticiones */
+// app.listen(3000, () => {
+//     console.log('Server listening on 3000');
+// })
 
 /* Conectamos CSS, JS e Imagenes */
 // app.use(express.static('/public'));
@@ -29,7 +29,7 @@ app.use("/js", express.static(__dirname + "/public/js"));
 app.use("/img", express.static(__dirname + "/public/img"));
 
 /* Nos connectamos a la bbdd */
-mongoose.connect(db_url, { 
+mongoose.connect(db_url, {
         useNewUrlParser: true,
         useUnifiedTopology: true
     })
@@ -40,3 +40,5 @@ mongoose.connect(db_url, {
         console.log('Error connecting to sudoku database >:');
         console.log(err);
     });
+
+module.exports = app;
