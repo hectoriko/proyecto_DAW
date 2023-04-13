@@ -17,16 +17,18 @@ app.use('/api', db_routes);
 /* Utilizamos las rutas de ./routes/views.routes.js: páginas */
 app.use('/', views_routes);
 
-// /* Escuchamos peticiones */
-// app.listen(3000, () => {
-//     console.log('Server listening on 3000');
-// })
-
-/* Conectamos CSS, JS e Imagenes */
-// app.use(express.static('/public'));
+/* Conectamos CSS, JS e Imágenes */
 app.use("/css", express.static(__dirname + "/public/css"));
 app.use("/js", express.static(__dirname + "/public/js"));
 app.use("/img", express.static(__dirname + "/public/img"));
+
+/* Utilizamos cookie-session para guardar en lado cliente */
+app.use({
+  name: "sudokle-session",
+  // El secreto debeía ser generado aleatoriamente, seguramente?
+  secret: "PRUEBA-CAMBIAR",
+  httpOnly: true,
+});
 
 /* Nos connectamos a la bbdd */
 mongoose.connect(db_url, {
