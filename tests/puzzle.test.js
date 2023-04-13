@@ -2,7 +2,6 @@ const mongoose = require('mongoose')
 const request = require('supertest')
 const app = require('../app')
 const db_url = require('../configs/db.configs').url
-require('dotenv').config
 
 
 /* Abrimos una nueva conexión a la BBDD antes de cada test */
@@ -23,10 +22,11 @@ describe("GET /api/getAll", () => {
   });
 });
 
-// describe("GET /api/getRandom/hard", () => {
-//   it("should return a single hard puzzle", async () => {
-//     const res = await request(app).get("/api/getRandom/hard");
-//     expect(res.statusCode).toBe(200);
-//     expect(res.body.length).toBe(1);
-//   });
-// });
+describe("GET /api/getRandom/hard", () => {
+  it("should return a single hard puzzle", async () => {
+    const res = await request(app).get("/api/getRandom/hard");
+    expect(res.statusCode).toBe(200);
+    expect(res.body.level).toBe('hard');
+    // expect(res.body.length).toBe(1);
+  });
+});

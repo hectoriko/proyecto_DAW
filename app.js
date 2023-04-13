@@ -17,10 +17,10 @@ app.use('/api', db_routes);
 /* Utilizamos las rutas de ./routes/views.routes.js: páginas */
 app.use('/', views_routes);
 
-/* Escuchamos peticiones */
-app.listen(3000, () => {
-    console.log('Server listening on 3000');
-})
+// /* Escuchamos peticiones */
+// app.listen(3000, () => {
+//     console.log('Server listening on 3000');
+// })
 
 /* Conectamos CSS, JS e Imagenes */
 // app.use(express.static('/public'));
@@ -40,3 +40,5 @@ mongoose.connect(db_url, {
         console.log('Error connecting to sudoku database >:');
         console.log(err);
     });
+
+module.exports = app;

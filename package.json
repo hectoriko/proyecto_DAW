@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "cross-env NODE_ENV=test jest --time_out=12000",
+    "test-doh": "cross-env NODE_ENV=test jest --time_out=12000 --detectOpenHandles",
     "env": "node scripts/setupenv.js",
     "populatedb": "node scripts/populate.js && echo \"48 sudoku puzzles of various difficutlies added to database.\" && exit 0",
     "serve": "browser-sync app.js -w",
