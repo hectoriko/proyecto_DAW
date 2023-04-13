@@ -1,0 +1,22 @@
+.sudo-keyboard {
+  // background-color: red;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 10px;
+
+  &__key {
+    background-color: #eaeef4;
+    color: #0072e3;
+    padding: 15px;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color .1s ease-in-out;
+    -webkit-tap-highlight-color: transparent;
+
+    &:hover {
+      background-color: #b5becc;
+    }
+  }
+}

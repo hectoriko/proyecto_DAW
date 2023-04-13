@@ -1,9 +1,10 @@
 import { addTemplate } from "./insert_templates.js";
 import { loadYoutubeTutorials } from "./youtube_tutorials.js";
 import { handleLogin } from "./login.js";
-
 // const addTemplate = require('./insert_templates.js');z
-// console.log("🚀 - addTemplate:", addTemplate)
+
+import SudokuToolCollection from "sudokutoolcollection";
+const sudokuToolCollection = SudokuToolCollection();
 
 console.log("If you can read this, the file has loaded")
 
@@ -16,6 +17,8 @@ setTimeout(function () {
     })
 }, 2000)
 
+
+
 function callApi(level) {
    fetch(`/api/getRandom/${level}`)
    .then((response) => response.json())
@@ -24,7 +27,10 @@ function callApi(level) {
       const sudoku = document.querySelector(".sudo-sudoku");
       
       let sudokuAsString = data.cells;
+      console.log("🚀 ~ sudokuAsString", sudokuAsString)
+      console.log(typeof sudokuAsString)
       let sudokuAsArray = stringToArray(sudokuAsString)
+      console.log("🚀 ~ sudokuAsArray", sudokuAsArray)
       
       // const test = document.getElementById("test");
       // const template = /*html*/ `
@@ -55,6 +61,13 @@ function callApi(level) {
 
       sudoku.innerHTML = '';
       sudoku.innerHTML = sudokuTemplate;
+      const allCells = document.querySelectorAll('#sudo_gameplate td div');
+
+
+      allCells.forEach((cell, index) => {
+         if (sudokuAsString[index] === '.') cell.textContent = '';
+         if (sudokuAsString[index] !== '.') cell.textContent = sudokuAsString[index];
+      })
    })
    .catch(e => console.error(e));
 }
@@ -77,5 +90,36 @@ function stringToArray(s) {
 function parseCell(cell) {
    return cell === '.' ? '' : cell;
 }
+
+
+
+setTimeout(function () {
+
+   const allTd = document.querySelectorAll('#sudo_gameplate td');
+
+   let selectedCell;
+
+   allTd.forEach((td, index) => {
+      td.addEventListener('click', (e) => {
+         const div = td.querySelector("div")
+         selectedCell = div;
+         div.classList.add('selected-cell');
+      })
+   })
+
+   const keys = document.querySelectorAll('.sudo-keyboard__key')
+   keys.forEach(key => {
+      key.addEventListener('click', (e) => {
+         selectedCell.textContent = key.textContent;
+      })
+   })
+
+}, 2000)
+
+// TODO:
+
+
+
+
 
  
