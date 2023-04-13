@@ -20,20 +20,28 @@
 
 1. Creamos una carpeta donde se clonará el repositorio. Abrimos el terminal Git CMD y nos colocamos en el directorio creado. 
    
+   ```sh
    $ cd /ruta/carpeta
+   ```
 
    Clonamos el repositorio y entramos en la carpeta del proyecto:
    
+   ```sh
    $ git clone https://github.com/hectoriko/proyecto_DAW
    $ cd proyecto_DAW
-  
+   ```
+   
 2. Instalamos las dependencias de desarrollo:
    
+   ```sh
    $ npm install
+   ```
    
 3. Ejecutamos el script para meter nuestro usuario y contraseña de ATLAS. USER: Sudokle PASSWORD: IFPsudokle
    
+   ```sh
    $ npm run env
+   ```
    
    Nos creara un archivo `.env` con los datos requeridos por la base de datos.
 
@@ -41,8 +49,10 @@
 
 - Instanciar el servidor localmente. 
 
+   ```sh
    $ npm start
-
+   ```
+   
 - Abrir navegador e introducir la direccion:
 
    localhost:3000
