@@ -15,8 +15,8 @@ const puzzleSchema = mongoose.Schema({
         enum : ['easy', 'medium', 'hard']
     },
     cells: {
-        type: String, 
-        unique: true, 
+        type: String,
+        unique: true,
         required: true
     }
 });

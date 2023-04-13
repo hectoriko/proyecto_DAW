@@ -5,9 +5,8 @@
 const User = require('../models/user');
 
 checkDuplicateUsernameOrEmail = (req, res, next) => {
-  // Username
   User.findOne({
-    username: req.body.username
+    user_name: req.body.user_name
   }).exec((err, user) => {
     if (err) {
       res.status(500).send({ message: err });
@@ -15,11 +14,10 @@ checkDuplicateUsernameOrEmail = (req, res, next) => {
     }
 
     if (user) {
-      res.status(400).send({ message: "Failed! Username is already in use!" });
+      res.status(400).send({ message: "Sorry, that username is not available :(" });
       return;
     }
 
-    // Email
     User.findOne({
       email: req.body.email
     }).exec((err, user) => {
@@ -29,7 +27,7 @@ checkDuplicateUsernameOrEmail = (req, res, next) => {
       }
 
       if (user) {
-        res.status(400).send({ message: "Failed! Email is already in use!" });
+        res.status(400).send({ message: "Sorry, that email is already in use :(" });
         return;
       }
 
@@ -37,3 +35,7 @@ checkDuplicateUsernameOrEmail = (req, res, next) => {
     });
   });
 };
+
+const verifyNew = checkDuplicateUsernameOrEmail;
+
+modules.exports = verifyNew;

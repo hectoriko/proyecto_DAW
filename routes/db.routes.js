@@ -66,8 +66,7 @@ router.get('/getAll', async (req, res) => {
 // router.get('/login/:user_name', async (req, res) => {
 //     try {
 //         const user = req.params.user_name;
-//         console.log("🚀 BACK - user:", user)
-        
+
 //     } catch(err) {
 //         res.status(500).json({message: err.message});
 //     }
@@ -85,7 +84,7 @@ router.get('/getAll', async (req, res) => {
 //         // const user = await User.findOne({ user_name, password_hash });
 //         console.log("🚀 - user_name:", user_name)
 //         console.log("🚀 - password_hash:",  password_hash)
-        
+
 //     // if (user) {
 //     //   req.session.userId = user._id;
 //     //   res.redirect('/');
