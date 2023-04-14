@@ -1,4 +1,4 @@
-/* 
+/*
  * Configuración para la conexión a MongoDB Atlas.
  */
 require('dotenv').config()
