@@ -1,8 +1,7 @@
-/* 
+/*
  * Configuración para la conexión a MongoDB Atlas.
  */
 require('dotenv').config()
-console.log(process.env)
 const user = process.env.ATLAS_USER;
 const pass = process.env.ATLAS_PASS;
 const bbdd = "sudokle";
