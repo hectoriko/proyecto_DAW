@@ -9,8 +9,8 @@
     "env": "node scripts/setupenv.js",
     "populatedb": "node scripts/populate.js && echo \"48 sudoku puzzles of various difficutlies added to database.\" && exit 0",
     "serve": "browser-sync app.js -w",
-    "start": "nodemon app.js",
-    "server": "node app.js",
+    "start": "nodemon server.js",
+    "server": "node server.js",
     "watchless": "less-watch-compiler ./public/css/input ./public/css/output"
   },
   "repository": {
