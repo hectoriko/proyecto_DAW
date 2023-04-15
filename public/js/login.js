@@ -6,13 +6,13 @@ export function handleLogin() {
    console.log({user, password});
 
    // TODO: This part needs backend
-   // fetch(`/api/login/user=${user}&password=${password}`)
-   // fetch(`/login/user=${user}`)
-   // .then((response) => response.json())
-   // .then((data) => {
-   //    console.log("🚀 - data:", data)
-   // })
-   // .catch(e => console.error(e));
+   fetch(`/api/login/user=${user}&password=${password}`)
+   fetch(`/login/user=${user}`)
+   .then((response) => response.json())
+   .then((data) => {
+      console.log("🚀 - data:", data)
+   })
+   .catch(e => console.error(e));
 }
 
 function showLoginModal() {
