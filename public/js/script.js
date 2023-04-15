@@ -117,8 +117,8 @@ setTimeout(function () {
     const num = selectedCell.textContent
 
     // TODO: Add class with valid/invalid
-    if (solution[index] === num) console.log('Correcto')
-    else console.log('invalid')
+    if (solution[index] === num) console.log('Num. Correcto')
+    else console.log('Num. incorrecto')
   }
 
   function checkSudoku() {
@@ -129,8 +129,9 @@ setTimeout(function () {
     const arrString = arr.join("");
 
     // TODO: Check if sudoku is actually completed
-    if (arrString === solution) console.log('TODO OK')
-    else console.log('TODO NO')
+    // TODO: Add modal OK/KO
+    if (arrString === solution) console.log('SUDOKU OK')
+    else console.log('SUDOKU KO')
   }
 
 
