@@ -5,12 +5,19 @@ const db_configs = require('./configs/db.configs');
 const views_routes = require('./routes/views.routes')
 const auth_routes = require('./routes/auth.routes')
 const favicon = require('serve-favicon');
+const bodyParser = require('body-parser')
+const cookieParser = require('cooke-parser')
 const path = require('path');
 const app = express();
 const db_url = db_configs.url;
 
 /* Cargamos favicon */
-app.use(favicon(path.join(__dirname, 'public/favicon', 'favicon.ico')))
+app.use(favicon(path.join(__dirname, 'public/favicon', 'favicon.ico')));
+
+/* Utilizamos body-parser y cookie-parser para parsear métodos POST */
+app.use(body_parser.json());
+app.use(body_parser.urlencoded({ extended: false }));
+app.use(cookieParser())
 
 /* Utilizamos las rutas de ./routes/db.routes.js: APIs */
 app.use('/api', db_routes);
@@ -21,29 +28,29 @@ app.use('/auth', auth_routes);
 /* Utilizamos las rutas de ./routes/views.routes.js: páginas */
 app.use('/', views_routes);
 
-
 /* Conectamos CSS, JS e Imagenes */
 app.use("/css", express.static(__dirname + "/public/css"));
 app.use("/js", express.static(__dirname + "/public/js"));
 app.use("/img", express.static(__dirname + "/public/img"));
 
 /* Creamos un secreto y una sesión para autentificar */
-app.use(session({secret:'guardar secreto',
+app.use(session({
+  secret:'guardar secreto',
   name:'uniqueSessionID',
   saveUninititialized:false,
 }));
 
 /* Nos connectamos a la bbdd */
 mongoose.connect(db_url, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    })
-    .then(() => {
-        console.log('Succesfull conection to the sudoku database <3');
-    })
-    .catch((err) => {
-        console.log('Error connecting to sudoku database >:');
-        console.log(err);
-    });
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
+  .then(() => {
+    console.log('Succesfull conection to the sudoku database <3');
+  })
+  .catch((err) => {
+    console.log('Error connecting to sudoku database >:');
+    console.log(err);
+  });
 
 module.exports = app;

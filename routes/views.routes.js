@@ -8,8 +8,6 @@ const router = express.Router();
 /* Ruta a views/index.html*/
 router.get('/', (req, res) => {
   try {
-    if (req.session.loggedIn)
-      res.redirect('/')
     res.sendFile(path.join(__dirname, '..', '/views/index.html'))
   } catch(err) {
     res.status(500).json({message: err.message})

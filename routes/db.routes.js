@@ -6,8 +6,6 @@ const Puzzle = require('../models/puzzle.js')
 const router = express.Router();
 module.exports = router;
 
-
-
 /*
  * Esta ruta nos permite obtener de la BBDD un objeto puzzle del nivel pasado
  * como parametro, por ahora tenemos:
