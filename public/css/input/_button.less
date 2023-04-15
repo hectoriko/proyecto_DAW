@@ -8,20 +8,29 @@
 	font-family: monospace;
 	cursor: pointer;
 	animation: all 0.3s ease-in-out;
-	
+
+
 	&--filled {
 		background-color: @main-color;
 		color: white;
 	}
-	
+
 	&--bubble {
 		border: 1px solid @main-color;
 		background-color: transparent;
 		color: @main-color;
-		
+		transition: all 0.2s ease-in-out;
+
 		&:hover {
+			border: 1px solid @main-color;
 			background-color: @main-color;
 			color: white;
 		}
+	}
+
+	&--bubble-active {
+		border: 1px solid @accent-color;
+		background-color: @accent-color;
+		color: white;
 	}
 }

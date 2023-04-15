@@ -4,7 +4,7 @@
  */
 const sudoku = require('sudokutoolcollection');
 const mongoose = require('mongoose');
-const dbConfig = require('../configs/db.config.js');
+const dbConfig = require('../configs/db.configs.js');
 const Puzzle = require('../models/puzzle.js')
 
 const dburl = dbConfig.url;
@@ -34,8 +34,11 @@ mongoose.connect(dburl, {
  */
 function createPuzzle(level) {
     const puzzle = new Puzzle();
+    const cells = sudoku().generator.generate(level)
     puzzle.level = level;
-    puzzle.cells = sudoku().generator.generate(level)
+    puzzle.cells = cells;
+    puzzle.solution = sudoku().solver.solve(cells)
+    // puzzle.candidates = sudoku().getCandidates.get(cells)
     return puzzle;
 }
 
@@ -56,4 +59,7 @@ for (let i = 0; i < 16; i++) {
     console.log('Has creado tres puzles de varias dificultades.')
 }
 
-mongoose.connection.close();
+// TODO: Add some kind of asyncronous function to close the connection
+setTimeout(() => {
+    mongoose.connection.close();
+}, 20000)
