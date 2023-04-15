@@ -2,9 +2,10 @@
   min-height: 300px;
   min-width: 300px;
   background-color: lightgrey;
+  display: none;
 }
 .selected-cell {
-  background-color: #3ea8b6 !important;
+  background-color: #d9f6fa !important;
 }
 /*!
  * Bootstrap v3.3.6 (http://getbootstrap.com)
@@ -152,7 +153,7 @@
   padding: 0;
 }
 a.sudo_link {
-  color: #000;
+  color: #3ea8b6;
 }
 .tiempo_controles {
   margin-bottom: 10px;
@@ -285,10 +286,10 @@ table.sudotable td.hidew {
   border: 1px solid #efefef !important;
 }
 table.sudotable td.vsep {
-  border-left: 2px solid #000;
+  border-left: 2px solid #3ea8b6;
 }
 table.sudotable td.hsep {
-  border-top: 2px solid #000;
+  border-top: 2px solid #3ea8b6;
 }
 .samurai tr td:nth-child(10),
 .samurai tr td:nth-child(13),
@@ -296,7 +297,7 @@ table.sudotable td.hsep {
 .samurai tr td:nth-child(19),
 .samurai tr td:nth-child(4),
 .samurai tr td:nth-child(7) {
-  border-left: 2px solid #000;
+  border-left: 2px solid #3ea8b6;
 }
 .samurai tr:nth-child(10) td,
 .samurai tr:nth-child(13) td,
@@ -304,7 +305,7 @@ table.sudotable td.hsep {
 .samurai tr:nth-child(19) td,
 .samurai tr:nth-child(4) td,
 .samurai tr:nth-child(7) td {
-  border-top: 2px solid #000;
+  border-top: 2px solid #3ea8b6;
 }
 div.sudo_field.field_alt {
   background: #fff;
@@ -434,7 +435,7 @@ table.sudotable tr {
   border-collapse: collapse;
   margin: 0;
   padding: 0;
-  border: 1px solid #000;
+  border: 1px solid #3ea8b6;
 }
 #sudo_numbers div.sudo_field.white,
 #sudo_numbers_mega div.sudo_field.white {
@@ -613,7 +614,7 @@ input[type=submit] {
 }
 form .submit input[type=submit] {
   background: #0877c0;
-  border: 1px solid #000;
+  border: 1px solid #3ea8b6;
   color: #fff;
   padding: 5px 10px;
 }
@@ -878,7 +879,12 @@ h2.game span {
 }
 .sudo-keyboard__key {
   background-color: #eaeef4;
+  background-color: #d9f6fa;
   color: #0072e3;
+  color: #6C6C6C;
+  font-family: monospace;
+  font-size: 16px;
+  font-weight: bold;
   padding: 15px;
   border-radius: 5px;
   text-align: center;
@@ -888,6 +894,8 @@ h2.game span {
 }
 .sudo-keyboard__key:hover {
   background-color: #b5becc;
+  background-color: #3ea8b6;
+  color: #fff;
 }
 .color-box {
   background-color: #d9f6fa;
@@ -956,6 +964,9 @@ h2.game span {
   font-size: clamp(1rem, 1.3vw, 1.2rem);
   margin-bottom: 12px;
 }
+.sudo-aside__group--disabled {
+  opacity: 0.5;
+}
 .sudo-ranking__user {
   display: flex;
   flex-direction: row;
@@ -1001,9 +1012,16 @@ h2.game span {
   border: 1px solid #3ea8b6;
   background-color: transparent;
   color: #3ea8b6;
+  transition: all 0.2s ease-in-out;
 }
 .sudo-button--bubble:hover {
+  border: 1px solid #3ea8b6;
   background-color: #3ea8b6;
+  color: white;
+}
+.sudo-button--bubble-active {
+  border: 1px solid #e4b50b;
+  background-color: #e4b50b;
   color: white;
 }
 .sudo-modal {
@@ -1174,4 +1192,33 @@ a {
   .sudo-container {
     max-width: 1320px;
   }
+}
+.sudo-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: space-around;
+  gap: 30px;
+  margin-bottom: 12px;
+}
+.sudo-info p {
+  margin: 0;
+}
+.sudo-info button {
+  appearance: none;
+  border: none;
+  outline: none;
+  background-color: transparent;
+}
+.sudo-info__level {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #6C6C6C;
+  font-size: clamp(1rem, 1.3vw, 1.2rem);
+}
+.sudo-info__level span {
+  color: #3ea8b6;
+  font-weight: 600;
+}
+.sudo-info__timer {
+  font-family: monospace;
 }

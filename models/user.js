@@ -31,7 +31,6 @@ const userSchema = mongoose.Schema({
     type: Number,
     required: true
   }
-  
 });
 
 /* objeto para guardar tiempos de puzles */
