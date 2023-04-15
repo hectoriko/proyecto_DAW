@@ -1,12 +1,14 @@
 /*
- * Declaración de las rutas para views.html
+ * Declaración de las rutas para autentificación
  */
 const express = require('express');
 const path = require('path')
 const router = express.Router();
+const body_parser = require('body_parser');
+const app = require('../app');
 
 /* Ruta a views/index.html*/
-router.get('/', (req, res) => {
+router.get('/login', (req, res) => {
   try {
     if (req.session.loggedIn)
       res.redirect('/')
