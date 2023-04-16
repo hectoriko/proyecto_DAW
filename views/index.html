@@ -1,88 +1,117 @@
 <!DOCTYPE html>
 <html lang="es">
-
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sudokle</title>
-  <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sudokle</title>
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap" rel="stylesheet"> -->
-  <link href="css/output/main.css" rel="stylesheet" type="text/css">
+    <link href="css/output/main.css" rel="stylesheet" type="text/css" />
 
-  <script src="js/script.js" type="module" defer></script>
-</head>
+    <script src="js/script.js" type="module" defer></script>
+  </head>
 
-<body>
-  <div class="sudo-grid-container">
+  <body>
+    <div class="sudo-grid-container">
+      <header class="sudo-header"></header>
 
-    <header class="sudo-header"></header>
+      <div class="sudo-container">
+        <div class="sudo-middle">
+          <nav class="sudo-aside sudo-nav" id=""></nav>
 
-    <div class="sudo-container">
-      <div class="sudo-middle">
+          <main>
+            <div class="sudo-info">
+              <p class="sudo-info__level">Dificultad: <span></span></p>
+              <p class="sudo-info__timer">00 : 00 : 00</p>
+              <div class="buttons">
+                <button id="pauseTimer">⏸️</button>
+                <button id="startTimer">▶️</button>
+                <!-- <button id="resetTimer">Reset</button> -->
+                <button id="solucionar">solucionar</button>
+            </div>
+            </div>
+            <!-- <div class="sudo-sudoku" id=""></div> -->
 
-        <nav class="sudo-aside sudo-nav" id=""></nav>
+            <!-- <div id="test"></div> -->
 
-        <main>
-          <div class="sudo-sudoku" id=""></div>
+            <div id="js-sudo-test2"></div>
 
-          <div id="test"></div>
+            <div class="sudo-keyboard" id="js-keyboard">
+              <span class="sudo-keyboard__key">1</span>
+              <span class="sudo-keyboard__key">2</span>
+              <span class="sudo-keyboard__key">3</span>
+              <span class="sudo-keyboard__key">4</span>
+              <span class="sudo-keyboard__key">5</span>
+              <span class="sudo-keyboard__key">6</span>
+              <span class="sudo-keyboard__key">7</span>
+              <span class="sudo-keyboard__key">8</span>
+              <span class="sudo-keyboard__key">9</span>
+            </div>
+          </main>
 
-          <div id="js-sudo-test2"></div>
-        </main>
-
-        <aside class="sudo-aside">
-          <div class="sudo-aside__group">
-            <h2>Ranking</h2>
-            <ul class="sudo-ranking">
-              <li class="sudo-ranking__user">
-                <span class="sudo-ranking__posicion">1</span>
-                <span class="sudo-ranking__nombre">Usuario A</span>
-                <span class="sudo-ranking__puntos">2300 pts</span>
-              </li>
-              <li class="sudo-ranking__user">
-                <span class="sudo-ranking__posicion">2</span>
-                <span class="sudo-ranking__nombre">Usuario B</span>
-                <span class="sudo-ranking__puntos">1900 pts</span>
-              </li>
-              <li class="sudo-ranking__user">
-                <span class="sudo-ranking__posicion">3</span>
-                <span class="sudo-ranking__nombre">Usuario C</span>
-                <span class="sudo-ranking__puntos">400 pts</span>
-              </li>
-
-            </ul>
-          </div>
-          <div class="sudo-aside__group">
-            <h2>Amigos</h2>
-            <ul>
-              <li>
-                <span>👤</span>
-                <span class="nombre">Usuario A</span>
-              </li>
-            </ul>
-          </div>
-        </aside>
+          <aside class="sudo-aside">
+            <div class="sudo-aside__group">
+              <h2>Ranking</h2>
+              <ul class="sudo-ranking">
+                <li class="sudo-ranking__user">
+                  <span class="sudo-ranking__posicion">1</span>
+                  <span class="sudo-ranking__nombre">Usuario A</span>
+                  <span class="sudo-ranking__puntos">2300 pts</span>
+                </li>
+                <li class="sudo-ranking__user">
+                  <span class="sudo-ranking__posicion">2</span>
+                  <span class="sudo-ranking__nombre">Usuario B</span>
+                  <span class="sudo-ranking__puntos">1900 pts</span>
+                </li>
+                <li class="sudo-ranking__user">
+                  <span class="sudo-ranking__posicion">3</span>
+                  <span class="sudo-ranking__nombre">Usuario C</span>
+                  <span class="sudo-ranking__puntos">400 pts</span>
+                </li>
+              </ul>
+            </div>
+            <div class="sudo-aside__group">
+              <h2>Amigos</h2>
+              <ul>
+                <li>
+                  <span>👤</span>
+                  <span class="nombre">Usuario A</span>
+                </li>
+              </ul>
+            </div>
+          </aside>
+        </div>
       </div>
-
+      <footer class="sudo-footer"></footer>
     </div>
-    <footer class="sudo-footer"></footer>
-  </div>
 
-  <div class="sudo-modal">
-    <div class="sudo-modal__overlay"></div>
-    <div class="sudo-modal__modal-wrapper">
-      <h2 class="sudo-modal__title">Login</h2>
-      <span class="sudo-modal__close js-close-login-modal">&times;</span>
+    <div class="sudo-modal">
+      <div class="sudo-modal__overlay"></div>
+      <div class="sudo-modal__modal-wrapper">
+        <h2 class="sudo-modal__title">Login</h2>
+        <span class="sudo-modal__close js-close-login-modal">&times;</span>
 
-      <form class="sudo-modal__form" action="" method="">
-        <input class="sudo-modal__input js-user" type="text" placeholder="Usuario" name="user_name">
-        <input class="sudo-modal__input js-password" type="password" placeholder="Contraseña" name="password_hash">
-        <input class="sudo-modal__button sudo-button sudo-button--filled js-send-login" type="submit" value="Login">
-      </form>
+        <form class="sudo-modal__form" action="" method="">
+          <input
+            class="sudo-modal__input js-user"
+            type="text"
+            placeholder="Usuario"
+            name="user_name"
+          />
+          <input
+            class="sudo-modal__input js-password"
+            type="password"
+            placeholder="Contraseña"
+            name="password_hash"
+          />
+          <input
+            class="sudo-modal__button sudo-button sudo-button--filled js-send-login"
+            type="submit"
+            value="Login"
+          />
+        </form>
+      </div>
     </div>
-  </div>
-
-</body>
-
+  </body>
 </html>

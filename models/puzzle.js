@@ -1,4 +1,4 @@
-/* 
+/*
  * Esquema de los puzles en la base de datos.
  */
 const mongoose = require('mongoose');
@@ -15,10 +15,20 @@ const puzzleSchema = mongoose.Schema({
         enum : ['easy', 'medium', 'hard']
     },
     cells: {
-        type: String, 
-        unique: true, 
+        type: String,
+        unique: true,
+        required: true
+    },
+    solution: {
+        type: String,
+        unique: true,
         required: true
     }
+    // candidates: {
+    //     type: Array,
+    //     unique: true,
+    //     required: true
+    // }
 });
 
 module.exports = mongoose.model('Puzzle', puzzleSchema);

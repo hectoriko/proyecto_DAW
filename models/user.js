@@ -23,6 +23,7 @@ const userSchema = mongoose.Schema({
   token: {
     type: String
   },
+
   // solved_puzzles: {
   //   type: Array
   // },

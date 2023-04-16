@@ -2,6 +2,10 @@
   min-height: 300px;
   min-width: 300px;
   background-color: lightgrey;
+  display: none;
+}
+.selected-cell {
+  background-color: #d9f6fa !important;
 }
 /*!
  * Bootstrap v3.3.6 (http://getbootstrap.com)
@@ -149,7 +153,7 @@
   padding: 0;
 }
 a.sudo_link {
-  color: #000;
+  color: #3ea8b6;
 }
 .tiempo_controles {
   margin-bottom: 10px;
@@ -282,10 +286,10 @@ table.sudotable td.hidew {
   border: 1px solid #efefef !important;
 }
 table.sudotable td.vsep {
-  border-left: 2px solid #000;
+  border-left: 2px solid #3ea8b6;
 }
 table.sudotable td.hsep {
-  border-top: 2px solid #000;
+  border-top: 2px solid #3ea8b6;
 }
 .samurai tr td:nth-child(10),
 .samurai tr td:nth-child(13),
@@ -293,7 +297,7 @@ table.sudotable td.hsep {
 .samurai tr td:nth-child(19),
 .samurai tr td:nth-child(4),
 .samurai tr td:nth-child(7) {
-  border-left: 2px solid #000;
+  border-left: 2px solid #3ea8b6;
 }
 .samurai tr:nth-child(10) td,
 .samurai tr:nth-child(13) td,
@@ -301,7 +305,7 @@ table.sudotable td.hsep {
 .samurai tr:nth-child(19) td,
 .samurai tr:nth-child(4) td,
 .samurai tr:nth-child(7) td {
-  border-top: 2px solid #000;
+  border-top: 2px solid #3ea8b6;
 }
 div.sudo_field.field_alt {
   background: #fff;
@@ -431,7 +435,7 @@ table.sudotable tr {
   border-collapse: collapse;
   margin: 0;
   padding: 0;
-  border: 1px solid #000;
+  border: 1px solid #3ea8b6;
 }
 #sudo_numbers div.sudo_field.white,
 #sudo_numbers_mega div.sudo_field.white {
@@ -610,7 +614,7 @@ input[type=submit] {
 }
 form .submit input[type=submit] {
   background: #0877c0;
-  border: 1px solid #000;
+  border: 1px solid #3ea8b6;
   color: #fff;
   padding: 5px 10px;
 }
@@ -841,7 +845,7 @@ h2.game span {
   font-family: Open Sans;
 }
 .sudo-header {
-  background-color: #308a96;
+  background-color: #3ea8b6;
   padding: 20px;
   display: flex;
   gap: 20px;
@@ -867,6 +871,32 @@ h2.game span {
   margin-left: auto;
   cursor: pointer;
 }
+.sudo-keyboard {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 10px;
+}
+.sudo-keyboard__key {
+  background-color: #eaeef4;
+  background-color: #d9f6fa;
+  color: #0072e3;
+  color: #6C6C6C;
+  font-family: monospace;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 15px;
+  border-radius: 5px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.1s ease-in-out;
+  -webkit-tap-highlight-color: transparent;
+}
+.sudo-keyboard__key:hover {
+  background-color: #b5becc;
+  background-color: #3ea8b6;
+  color: #fff;
+}
 .color-box {
   background-color: #d9f6fa;
   padding: 20px;
@@ -878,20 +908,20 @@ h2.game span {
 .sudo-h2 {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
-  color: #308a96;
+  color: #3ea8b6;
   font-size: clamp(1.2rem, 2vw, 2rem);
   margin-bottom: 10px;
 }
 .sudo-h3 {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
-  color: #308a96;
+  color: #3ea8b6;
   font-size: clamp(1.1rem, 1.5vw, 1.6rem);
   margin-bottom: 10px;
 }
 .sudo-p {
   font-family: Arial, Helvetica, sans-serif;
-  color: #308a96;
+  color: #3ea8b6;
   color: #6C6C6C;
   font-size: clamp(1rem, 1.3vw, 1.2rem);
 }
@@ -923,16 +953,19 @@ h2.game span {
 .sudo-aside__group h2 {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
-  color: #308a96;
+  color: #3ea8b6;
   font-size: clamp(1.2rem, 2vw, 2rem);
   margin-bottom: 10px;
 }
 .sudo-aside__group ul li {
   font-family: Arial, Helvetica, sans-serif;
-  color: #308a96;
+  color: #3ea8b6;
   color: #6C6C6C;
   font-size: clamp(1rem, 1.3vw, 1.2rem);
   margin-bottom: 12px;
+}
+.sudo-aside__group--disabled {
+  opacity: 0.5;
 }
 .sudo-ranking__user {
   display: flex;
@@ -953,7 +986,7 @@ h2.game span {
   color: #6C6C6C;
 }
 .sudo-ranking__puntos {
-  color: #308a96;
+  color: #3ea8b6;
 }
 .sudo-footer {
   display: flex;
@@ -972,16 +1005,23 @@ h2.game span {
   animation: all 0.3s ease-in-out;
 }
 .sudo-button--filled {
-  background-color: #308a96;
+  background-color: #3ea8b6;
   color: white;
 }
 .sudo-button--bubble {
-  border: 1px solid #308a96;
+  border: 1px solid #3ea8b6;
   background-color: transparent;
-  color: #308a96;
+  color: #3ea8b6;
+  transition: all 0.2s ease-in-out;
 }
 .sudo-button--bubble:hover {
-  background-color: #308a96;
+  border: 1px solid #3ea8b6;
+  background-color: #3ea8b6;
+  color: white;
+}
+.sudo-button--bubble-active {
+  border: 1px solid #e4b50b;
+  background-color: #e4b50b;
   color: white;
 }
 .sudo-modal {
@@ -1021,7 +1061,7 @@ h2.game span {
 .sudo-modal__title {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
-  color: #308a96;
+  color: #3ea8b6;
   font-size: clamp(1.1rem, 1.5vw, 1.6rem);
   margin-bottom: 10px;
   margin-bottom: 30px;
@@ -1033,14 +1073,15 @@ h2.game span {
   font-size: 22px;
   font-weight: bolder;
   color: #6C6C6C;
+  cursor: pointer;
 }
 .sudo-modal__close:hover {
-  color: #308a96;
+  color: #3ea8b6;
 }
 .sudo-modal__input {
   border: 0;
   outline: 0;
-  border-bottom: 1px solid #308a96;
+  border-bottom: 1px solid #3ea8b6;
   padding: 5px;
 }
 .sudo-tips {
@@ -1053,26 +1094,26 @@ h2.game span {
 .sudo-tip__title {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
-  color: #308a96;
+  color: #3ea8b6;
   font-size: clamp(1.2rem, 2vw, 2rem);
   margin-bottom: 10px;
   counter-increment: css-counter 1;
 }
 .sudo-tip__title:before {
-  color: #1e6770;
+  color: #24808c;
   content: counter(css-counter) " - ";
 }
 .sudo-tip__text {
   font-family: Arial, Helvetica, sans-serif;
-  color: #308a96;
+  color: #3ea8b6;
   color: #6C6C6C;
   font-size: clamp(1rem, 1.3vw, 1.2rem);
 }
 .sudo-tutoriales h1 {
   text-align: center;
   font-size: 72px;
-  background: #308a96;
-  background: linear-gradient(45deg, #1e6770 0%, #308a96 100%);
+  background: #3ea8b6;
+  background: linear-gradient(45deg, #24808c 0%, #3ea8b6 100%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -1101,7 +1142,7 @@ h2.game span {
 .sudo-tutoriales__video h3 {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
-  color: #308a96;
+  color: #3ea8b6;
   font-size: clamp(1.1rem, 1.5vw, 1.6rem);
   margin-bottom: 10px;
 }
@@ -1151,4 +1192,33 @@ a {
   .sudo-container {
     max-width: 1320px;
   }
+}
+.sudo-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: space-around;
+  gap: 30px;
+  margin-bottom: 12px;
+}
+.sudo-info p {
+  margin: 0;
+}
+.sudo-info button {
+  appearance: none;
+  border: none;
+  outline: none;
+  background-color: transparent;
+}
+.sudo-info__level {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #6C6C6C;
+  font-size: clamp(1rem, 1.3vw, 1.2rem);
+}
+.sudo-info__level span {
+  color: #3ea8b6;
+  font-weight: 600;
+}
+.sudo-info__timer {
+  font-family: monospace;
 }
