@@ -7,11 +7,11 @@ const router = express.Router();
 
 /* Ruta a views/index.html*/
 router.get('/', (req, res) => {
-    try {
-        res.sendFile(path.join(__dirname, '..', '/views/index.html'))
-    } catch(err) {
-        res.status(500).json({message: err.message})
-    }
+  try {
+    res.sendFile(path.join(__dirname, '..', '/views/index.html'))
+  } catch(err) {
+    res.status(500).json({message: err.message})
+  }
 });
 
 /* Ruta a todo el resto de páginas .html en views/ */
