@@ -36,6 +36,7 @@ setTimeout(function () {
     checkSudoku();
   }
   function preloadSudoku() {
+    failCount = 0;
     const chosenLvl = 'easy';
 
     const levelButton = document.querySelector(`.js-levels .js-button-lvl[data-level='${chosenLvl}']`);
@@ -46,7 +47,7 @@ setTimeout(function () {
     document.querySelector(".sudo-info__level span").textContent =  levelButton.textContent;
 
     // Start timer
-    startTimer();
+    // startTimer();
 
     const level = levelButton.dataset.level;
     callSudokuApi(level);
@@ -56,6 +57,10 @@ setTimeout(function () {
     fetch(`/api/getRandom/${level}`)
       .then(response => response.json())
       .then(data => populateSudoku(data))
+      .then(() => {
+        resetTimer();
+        startTimer();
+      })
       .catch(e => console.error(e));
   }
 
@@ -145,6 +150,8 @@ setTimeout(function () {
 
   function handleFailCount() {
     if (failCount >= 3) console.log("3 fallos");
+    const gameOverModal = document.querySelector(".js-modal-game-over");
+    if (failCount >= 3) showModal(gameOverModal);
   }
 
   function checkCell() {
@@ -174,7 +181,6 @@ setTimeout(function () {
     // Check is sudoku is completed
     if (allNumbersString.length !== solution.length) return;
 
-    // TODO: Add modal OK
     if (allNumbersString === solution) handleSudokuOK();
   }
 
@@ -187,41 +193,65 @@ setTimeout(function () {
     checkSudoku();
   }
 
+  function calculatePoints(level, timeTaken, multiplier) {
+    // Max points that can be earned according to difficulty
+    const maxPoints = level === "easy"
+    ? 1000
+    : level === "medium"
+    ? 1500
+    : level === "hard"
+    ? 2000
+    : 0; // 0 as fallback
+
+    // Time it should take according to difficulty
+    const referenceTime = level === "easy"
+    ? 60 * 10 // 10 minutes for easy
+    : level === "medium"
+    ? 60 * 20 // 20 minutes for medium
+    : level === "hard"
+    ? 60 * 30 // 30 minutes for hard
+    : 60 * 60; // 60 minutes as fallback
+
+    // calculate the points based on the time taken and the multiplier
+    let points = Math.round((maxPoints / ((timeTaken + 1) / (referenceTime + 1))) * multiplier);
+
+    // ensure that the points value is not greater than maxPoints
+    if (points > maxPoints) points = maxPoints;
+
+    return points;
+  }
+
+
   function handleSudokuOK() {
     pauseTimer();
 
     let time = document.querySelector(".sudo-info__timer").textContent;
     time = time.replaceAll(" ", "");
     const [hours, minutes, seconds] = time.split(":").map(Number);
-    const totalSeconds = hours * 3600 + minutes * 60 + seconds;
+    const timeTaken = hours * 3600 + minutes * 60 + seconds; // In seconds
 
     const level = document
       .querySelector(".sudo-button--bubble-active")
       .getAttribute("data-level");
 
-    const multiplier =
+      // Adjust multipler according to difficulty
+      const multiplier =
       level === "easy"
-        ? 1
-        : level === "medium"
-        ? 1.5
-        : level === "hard"
-        ? 2
-        : 0;
+      ? 1
+      : level === "medium"
+      ? 1.5
+      : level === "hard"
+      ? 2
+      : 0;
+      
+      const points = calculatePoints(level, timeTaken, multiplier)
 
-    // TODO: Add modal OK
-    // console.log("Enhorabuena!");
-    // console.log("🚀 ~ time", time);
-    // console.log("🚀 ~ level", level);
-    // console.log("🚀 ~ multiplier", multiplier);
-    // // Save total seconds to back
-    // console.log("🚀 ~ totalSeconds", totalSeconds);
+        const sudokuOkModal = document.querySelector(".js-modal-sudoku-ok");
 
-    const sudokuOkModal = document.querySelector(".js-modal-sudoku-ok");
-
-    sudokuOkModal.querySelector(".level").textContent = level
-    sudokuOkModal.querySelector(".multiplicador").textContent = multiplier
-    sudokuOkModal.querySelector(".time").textContent = time
-    sudokuOkModal.querySelector(".puntos").textContent = '?'
+        sudokuOkModal.querySelector(".level").textContent = level
+        sudokuOkModal.querySelector(".multiplicador").textContent = multiplier
+        sudokuOkModal.querySelector(".time").textContent = time
+        sudokuOkModal.querySelector(".puntos").textContent = points
 
     showModal(sudokuOkModal);
   }
@@ -245,8 +275,8 @@ setTimeout(function () {
       failCount = 0;
 
       // Reset timer & Start timer
-      resetTimer();
-      startTimer();
+      // resetTimer();
+      // startTimer();
 
       const level = button.dataset.level;
       callSudokuApi(level);
@@ -301,5 +331,20 @@ setTimeout(function () {
 
 
   preloadSudoku()
+
+
+
+  const closeGameOverModal = document.querySelector(
+    ".js-modal-game-over .js-close-modal",
+  );
+
+  closeGameOverModal.addEventListener("click", function () {
+    const gameOverModal = document.querySelector(".js-modal-game-over");
+
+    hideModal(gameOverModal);
+
+    setTimeout(() => preloadSudoku(), 1500);
+
+  });
 
 }, 2000);

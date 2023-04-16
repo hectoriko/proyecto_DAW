@@ -9,16 +9,13 @@ export function handleLogin() {
   fetch(`/api/login/user=${user}&password=${password}`);
   fetch(`/login/user=${user}`)
     .then(response => response.json())
-    .then(data => {
-      console.log("🚀 - data:", data);
-    })
     .catch(e => console.error(e));
 }
 
 setTimeout(() => {
   const openLoginModal = document.querySelector(".js-open-login-modal");
   openLoginModal.addEventListener("click", function () {
-    const loginModal = document.querySelector(".js-modal-sudoku-ok");
+    const loginModal = document.querySelector(".js-modal-login");
     showModal(loginModal);
   });
 

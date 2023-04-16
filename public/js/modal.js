@@ -17,3 +17,13 @@ export function hideModal(modal) {
   body.classList.remove("modal-open");
 }
 // }, 2000);
+
+// Close ANY modal
+// const closeModal = document.querySelectorAll(".js-close-modal");
+// closeModal.forEach( closeButton => {
+//   closeButton.addEventListener("click", function () {
+//     const activeModal = document.querySelector(".sudo-modal--active");
+//     hideModal(activeModal);
+//   })
+
+// })
