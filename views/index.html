@@ -128,11 +128,27 @@
         <span class="sudo-modal__close js-close-modal">&times;</span>
 
         <div>
-          Has completado el sudoku en nivel <span class="level"></span>. Eso multiplica tus puntos por <span class="multiplicador"></span>.
-          Has tardado <span class="time"></span>.
-          Has ganado <span class="puntos"></span>
+          <p>Has completado el sudoku en nivel <span class="level"></span>.</p>
+          <p>Eso multiplica tus puntos por <span class="multiplicador"></span>.</p>
+          <p>Has tardado <span class="time"></span> en completarlo.</p>
+          <p>Has ganado <span class="puntos"></span> puntos.</p>
         </div>
       </div>
     </div>
+
+    <!-- ! Modal 3 Fallos -->
+    <div class="sudo-modal js-modal-game-over">
+      <div class="sudo-modal__overlay"></div>
+      <div class="sudo-modal__modal-wrapper">
+        <h2 class="sudo-modal__title">Game over!</h2>
+        <span class="sudo-modal__close js-close-modal">&times;</span>
+
+        <div>
+          <p>Has tenido 3 fallos.</p>
+          <p>Vuelve a intentarlo.</p>
+        </div>
+      </div>
+    </div>
+
   </body>
 </html>
