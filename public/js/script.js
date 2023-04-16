@@ -1,26 +1,66 @@
 import { addTemplate } from "./insert_templates.js";
 import { loadYoutubeTutorials } from "./youtube_tutorials.js";
 import { handleLogin } from "./login.js";
+import { showModal, hideModal } from "./modal.js";
+
+
 // const addTemplate = require('./insert_templates.js');
 
-// const sudoku = require('sudokutoolcollection');
-// import SudokuToolCollection from "../node_modules/dist/sudokutoolcollection";
-// import SudokuToolCollection from "../../node_modules/dist/sudokutoolcollection";
-// import SudokuToolCollection from "sudokutoolcollection";
-// const sudokuTool = SudokuToolCollection();
-
-// const sudoku = require('sudokutoolcollection');
-
-// import sudokuTool from '../scripts/solve.js';
 // TODO: Do something about this setTimeOut
 setTimeout(function () {
   let selectedCell;
   let solution;
+  let failCount = 0;
+
+  // TIMER
+  let [milliseconds, seconds, minutes, hours] = [0, 0, 0, 0];
+  let timerRef = document.querySelector(".sudo-info__timer");
+  let interval = null;
+
+  function handleNumberInput(e, key) {
+    const isFixed = selectedCell.classList.contains("fixed");
+    if (isFixed) return;
+
+    // If on-screen keyboard is used
+    if (e.type === "click") selectedCell.textContent = key.textContent;
+
+    // If physical keyboard is used
+    if (e.type === "keyup") {
+      // Check key is 1 to 9
+      const regex = /^[1-9]$/;
+      if (regex.test(e.key)) selectedCell.textContent = e.key;
+      else return;
+    }
+
+    checkCell();
+    checkSudoku();
+  }
+  function preloadSudoku() {
+    failCount = 0;
+    const chosenLvl = 'easy';
+
+    const levelButton = document.querySelector(`.js-levels .js-button-lvl[data-level='${chosenLvl}']`);
+    // Mark button as active
+    levelButton.classList.add("sudo-button--bubble-active");
+
+    // Show current level
+    document.querySelector(".sudo-info__level span").textContent =  levelButton.textContent;
+
+    // Start timer
+    // startTimer();
+
+    const level = levelButton.dataset.level;
+    callSudokuApi(level);
+  };
 
   function callSudokuApi(level) {
     fetch(`/api/getRandom/${level}`)
       .then(response => response.json())
       .then(data => populateSudoku(data))
+      .then(() => {
+        resetTimer();
+        startTimer();
+      })
       .catch(e => console.error(e));
   }
 
@@ -36,7 +76,8 @@ setTimeout(function () {
     // Populate cells
     const allCells = document.querySelectorAll("#sudo_gameplate td div");
     allCells.forEach((cell, i) => {
-      cell.classList.remove("fixed");
+      // Clear fixed / right / wrong
+      cell.classList.remove("fixed", "is-right", "is-wrong");
       if (sudokuAsString[i] === ".") cell.textContent = "";
       else {
         cell.textContent = sudokuAsString[i];
@@ -78,27 +119,20 @@ setTimeout(function () {
     timerRef.innerHTML = ` ${h} : ${m} : ${s}`;
   }
 
-  // TIMER
-  let [milliseconds, seconds, minutes, hours] = [0, 0, 0, 0];
-  let timerRef = document.querySelector(".sudo-info__timer");
-  let int = null;
+  function startTimer() {
+    if (interval !== null) clearInterval(interval);
+    interval = setInterval(displayTimer, 10);
+  }
 
-  document.getElementById("startTimer").addEventListener("click", () => {
-    if (int !== null) clearInterval(int);
-    int = setInterval(displayTimer, 10);
-  });
+  function pauseTimer() {
+    clearInterval(interval);
+  }
 
-  document.getElementById("pauseTimer").addEventListener("click", () => {
-    clearInterval(int);
-  });
-
-  //   document.getElementById("resetTimer").addEventListener("click", () => {
-  //     clearInterval(int);
-  //     [milliseconds, seconds, minutes, hours] = [0, 0, 0, 0];
-  //     timerRef.innerHTML = "00 : 00 : 00 : 000 ";
-  //   });
-
-  //////////////
+  function resetTimer() {
+    clearInterval(interval);
+    [milliseconds, seconds, minutes, hours] = [0, 0, 0, 0];
+    timerRef.innerHTML = "00 : 00 : 00 : 000 ";
+  }
 
   function handleSelectionOfCell(cell) {
     // Clear previous selection
@@ -108,32 +142,119 @@ setTimeout(function () {
     // Highlight current selection
     cell.classList.add("selected-cell");
 
+    // TODO: Add highlighting of same row and same column cells
+
     // Assign new selection
     selectedCell = cell;
   }
 
+  function handleFailCount() {
+    if (failCount >= 3) console.log("3 fallos");
+    const gameOverModal = document.querySelector(".js-modal-game-over");
+    if (failCount >= 3) showModal(gameOverModal);
+  }
+
   function checkCell() {
     const index = selectedCell.getAttribute("data-index");
-    const num = selectedCell.textContent
+    const num = selectedCell.textContent;
 
-    // TODO: Add class with valid/invalid
-    if (solution[index] === num) console.log('Num. Correcto')
-    else console.log('Num. incorrecto')
+    // Clear previous classes
+    selectedCell.classList.remove("is-right", "is-wrong");
+
+    if (solution[index] === num) selectedCell.classList.add("is-right");
+    else {
+      selectedCell.classList.add("is-wrong");
+      failCount++;
+      handleFailCount();
+    }
+    // TODO: Add no-way class
   }
 
   function checkSudoku() {
-    const allNumbers = document.querySelectorAll("#sudo_gameplate td div")
-    const arr = [];
-    allNumbers.forEach(num => arr.push(num.textContent));
+    let allNumbers = Array.from(
+      document.querySelectorAll("#sudo_gameplate td div"),
+    );
+    allNumbers = allNumbers.map(num => num.textContent);
 
-    const arrString = arr.join("");
+    const allNumbersString = allNumbers.join("");
 
-    // TODO: Check if sudoku is actually completed
-    // TODO: Add modal OK/KO
-    if (arrString === solution) console.log('SUDOKU OK')
-    else console.log('SUDOKU KO')
+    // Check is sudoku is completed
+    if (allNumbersString.length !== solution.length) return;
+
+    if (allNumbersString === solution) handleSudokuOK();
   }
 
+  function autoSolveSudoku() {
+    const allCells = document.querySelectorAll("#sudo_gameplate td div");
+    allCells.forEach((cell, i) => {
+      cell.classList.remove("fixed", "is-right", "is-wrong");
+      cell.textContent = solution[i];
+    });
+    checkSudoku();
+  }
+
+  function calculatePoints(level, timeTaken, multiplier) {
+    // Max points that can be earned according to difficulty
+    const maxPoints = level === "easy"
+    ? 1000
+    : level === "medium"
+    ? 1500
+    : level === "hard"
+    ? 2000
+    : 0; // 0 as fallback
+
+    // Time it should take according to difficulty
+    const referenceTime = level === "easy"
+    ? 60 * 10 // 10 minutes for easy
+    : level === "medium"
+    ? 60 * 20 // 20 minutes for medium
+    : level === "hard"
+    ? 60 * 30 // 30 minutes for hard
+    : 60 * 60; // 60 minutes as fallback
+
+    // calculate the points based on the time taken and the multiplier
+    let points = Math.round((maxPoints / ((timeTaken + 1) / (referenceTime + 1))) * multiplier);
+
+    // ensure that the points value is not greater than maxPoints
+    if (points > maxPoints) points = maxPoints;
+
+    return points;
+  }
+
+
+  function handleSudokuOK() {
+    pauseTimer();
+
+    let time = document.querySelector(".sudo-info__timer").textContent;
+    time = time.replaceAll(" ", "");
+    const [hours, minutes, seconds] = time.split(":").map(Number);
+    const timeTaken = hours * 3600 + minutes * 60 + seconds; // In seconds
+
+    const level = document
+      .querySelector(".sudo-button--bubble-active")
+      .getAttribute("data-level");
+
+      // Adjust multipler according to difficulty
+      const multiplier =
+      level === "easy"
+      ? 1
+      : level === "medium"
+      ? 1.5
+      : level === "hard"
+      ? 2
+      : 0;
+      
+      const points = calculatePoints(level, timeTaken, multiplier)
+
+        const sudokuOkModal = document.querySelector(".js-modal-sudoku-ok");
+
+        sudokuOkModal.querySelector(".level").textContent = level
+        sudokuOkModal.querySelector(".multiplicador").textContent = multiplier
+        sudokuOkModal.querySelector(".time").textContent = time
+        sudokuOkModal.querySelector(".puntos").textContent = points
+
+    showModal(sudokuOkModal);
+  }
 
   // Add listeners for level buttons
   document.querySelectorAll(".js-levels .js-button-lvl").forEach(button => {
@@ -146,20 +267,18 @@ setTimeout(function () {
       // Mark button as active
       this.classList.add("sudo-button--bubble-active");
 
-      // Reset timer
-      clearInterval(int);
-      [milliseconds, seconds, minutes, hours] = [0, 0, 0, 0];
-      // timerRef.innerHTML = "00 : 00 : 00 : 000 ";
-      timerRef.innerHTML = "00 : 00 : 00";
-
-      // Start timer
-      if (int !== null) clearInterval(int);
-      int = setInterval(displayTimer, 10);
-
       // Show current level
-      const level = button.dataset.level;
-      document.querySelector(".sudo-info__level span").textContent = level;
+      document.querySelector(".sudo-info__level span").textContent =
+        button.textContent;
 
+      // Reset failure count
+      failCount = 0;
+
+      // Reset timer & Start timer
+      // resetTimer();
+      // startTimer();
+
+      const level = button.dataset.level;
       callSudokuApi(level);
     });
   });
@@ -173,66 +292,59 @@ setTimeout(function () {
   });
 
   // Use physical keyboard to input numbers
-  window.addEventListener("keyup", e => {
-    const isFixed = selectedCell.classList.contains("fixed");
-    if (isFixed) return;
 
-    if (e.key === "1" || e.keycode === 49) selectedCell.textContent = 1;
-    if (e.key === "2" || e.keycode === 50) selectedCell.textContent = 2;
-    if (e.key === "3" || e.keycode === 51) selectedCell.textContent = 3;
-    if (e.key === "4" || e.keycode === 52) selectedCell.textContent = 4;
-    if (e.key === "5" || e.keycode === 53) selectedCell.textContent = 5;
-    if (e.key === "6" || e.keycode === 54) selectedCell.textContent = 6;
-    if (e.key === "7" || e.keycode === 55) selectedCell.textContent = 7;
-    if (e.key === "8" || e.keycode === 56) selectedCell.textContent = 8;
-    if (e.key === "9" || e.keycode === 57) selectedCell.textContent = 9;
 
-    checkCell()
-    checkSudoku();
-  });
 
   // Use on-screen keyboard
   const keys = document.querySelectorAll(".sudo-keyboard__key");
-  keys.forEach(key => {
-    key.addEventListener("click", () => {
-      const isFixed = selectedCell.classList.contains("fixed");
-      if (isFixed) return;
-      selectedCell.textContent = key.textContent;
+  keys.forEach(key =>
+    key.addEventListener("click", e => handleNumberInput(e, key)),
+  );
 
-      checkCell()
-      checkSudoku();
-    });
+  window.addEventListener("keyup", e => {
+    // Check key is 1 to 9
+    const regex = /^[1-9]$/;
+    if (!regex.test(e.key)) return;
+    handleNumberInput(e);
   });
 
+  const solucionar = document.querySelector("#solucionar");
+  solucionar.addEventListener("click", () => autoSolveSudoku());
 
-  const solucionar = document.querySelector('#solucionar');
-  solucionar.addEventListener("click", () => {solveSudoku(solution)});
+  // Listen to start timer click
+  const startTimerButton = document.getElementById("startTimer");
+  startTimerButton.addEventListener("click", () => startTimer());
 
-  function solveSudoku(solution) {
-    const allCells = document.querySelectorAll("#sudo_gameplate td div");
-    allCells.forEach((cell, i) => cell.textContent = solution[i]);
-    checkSudoku();
-  }
+  // Listen to pause timer click
+  const pausetTimerButton = document.getElementById("pauseTimer");
+  pausetTimerButton.addEventListener("click", () => pauseTimer());
 
-  /* Convertir cells en formato cadena a matriz */
-  /* #region   */
-  // function stringToArray(s) {
-  //   const rows = [];
-  //   const stringArray = s.split("");
-  //   let row = [];
-  //   for (const cell in stringArray) {
-  //     row.push(stringArray[cell]);
-  //     if (parseInt(cell) % 9 === 8) {
-  //       rows.push(row);
-  //       row = [];
-  //     }
-  //   }
-  //   return rows;
-  // }
+  // Listen to reset timer click
+  //   document.getElementById("resetTimer").addEventListener("click", () => {
+  //     clearInterval(int);
+  //     [milliseconds, seconds, minutes, hours] = [0, 0, 0, 0];
+  //     timerRef.innerHTML = "00 : 00 : 00 : 000 ";
+  //   });
 
-  // function parseCell(cell) {
-  //   return cell === "." ? "" : cell;
-  // }
-  /* #endregion */
+
+  // Load first sudoku
+
+
+  preloadSudoku()
+
+
+
+  const closeGameOverModal = document.querySelector(
+    ".js-modal-game-over .js-close-modal",
+  );
+
+  closeGameOverModal.addEventListener("click", function () {
+    const gameOverModal = document.querySelector(".js-modal-game-over");
+
+    hideModal(gameOverModal);
+
+    setTimeout(() => preloadSudoku(), 1500);
+
+  });
 
 }, 2000);

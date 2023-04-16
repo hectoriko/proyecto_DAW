@@ -24,13 +24,14 @@
             <div class="sudo-info">
               <p class="sudo-info__level">Dificultad: <span></span></p>
               <p class="sudo-info__timer">00 : 00 : 00</p>
-              <div class="buttons">
+              <div class="sudo-info__timer-controls">
                 <button id="pauseTimer">⏸️</button>
                 <button id="startTimer">▶️</button>
                 <!-- <button id="resetTimer">Reset</button> -->
-                <button id="solucionar">solucionar</button>
+              </div>
             </div>
-            </div>
+
+
             <!-- <div class="sudo-sudoku" id=""></div> -->
 
             <!-- <div id="test"></div> -->
@@ -47,6 +48,10 @@
               <span class="sudo-keyboard__key">7</span>
               <span class="sudo-keyboard__key">8</span>
               <span class="sudo-keyboard__key">9</span>
+            </div>
+
+            <div class="sudo-solve">
+              <button class="sudo-button sudo-button--bubble sudo-button--width100" id="solucionar">Solucionar</button>
             </div>
           </main>
 
@@ -86,11 +91,12 @@
       <footer class="sudo-footer"></footer>
     </div>
 
-    <div class="sudo-modal">
+    <!-- ! Modal login -->
+    <div class="sudo-modal js-modal-login">
       <div class="sudo-modal__overlay"></div>
       <div class="sudo-modal__modal-wrapper">
         <h2 class="sudo-modal__title">Login</h2>
-        <span class="sudo-modal__close js-close-login-modal">&times;</span>
+        <span class="sudo-modal__close js-close-modal">&times;</span>
 
         <form class="sudo-modal__form" action="" method="">
           <input
@@ -113,5 +119,36 @@
         </form>
       </div>
     </div>
+
+    <!-- ! Modal Sudoku Completado -->
+    <div class="sudo-modal js-modal-sudoku-ok">
+      <div class="sudo-modal__overlay"></div>
+      <div class="sudo-modal__modal-wrapper">
+        <h2 class="sudo-modal__title">Enhorabuena!</h2>
+        <span class="sudo-modal__close js-close-modal">&times;</span>
+
+        <div>
+          <p>Has completado el sudoku en nivel <span class="level"></span>.</p>
+          <p>Eso multiplica tus puntos por <span class="multiplicador"></span>.</p>
+          <p>Has tardado <span class="time"></span> en completarlo.</p>
+          <p>Has ganado <span class="puntos"></span> puntos.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ! Modal 3 Fallos -->
+    <div class="sudo-modal js-modal-game-over">
+      <div class="sudo-modal__overlay"></div>
+      <div class="sudo-modal__modal-wrapper">
+        <h2 class="sudo-modal__title">Game over!</h2>
+        <span class="sudo-modal__close js-close-modal">&times;</span>
+
+        <div>
+          <p>Has tenido 3 fallos.</p>
+          <p>Vuelve a intentarlo.</p>
+        </div>
+      </div>
+    </div>
+
   </body>
 </html>
