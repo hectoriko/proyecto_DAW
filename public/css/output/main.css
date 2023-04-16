@@ -7,13 +7,12 @@
 .selected-cell {
   background-color: #d9f6fa !important;
 }
-/*!
- * Bootstrap v3.3.6 (http://getbootstrap.com)
- * Copyright 2011-2015 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- */
-/*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
-/*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */
+.is-right {
+  color: #3a91e4 !important;
+}
+.is-wrong {
+  color: #eb4848 !important;
+}
 .sudogrande {
   padding: 5px;
 }
@@ -239,7 +238,7 @@ table.kids {
 table.sudotable {
   margin: 0 auto;
   text-align: center;
-  border: 0;
+  border: 2px solid #3ea8b6;
   width: 100%;
   max-width: 400px;
   table-layout: fixed;
@@ -267,14 +266,9 @@ table.sudotable.kids {
 }
 table.sudotable td {
   padding: 0;
-  border: 1px solid #999;
+  border: 1px solid #c2c2c2;
   width: 11%;
   position: relative;
-}
-table.sudotable.kids td,
-table.sudotable.mega td,
-table.sudotable.samurai td {
-  width: initial !important;
 }
 table.sudotable td:after {
   content: '';
@@ -291,22 +285,6 @@ table.sudotable td.vsep {
 table.sudotable td.hsep {
   border-top: 2px solid #3ea8b6;
 }
-.samurai tr td:nth-child(10),
-.samurai tr td:nth-child(13),
-.samurai tr td:nth-child(16),
-.samurai tr td:nth-child(19),
-.samurai tr td:nth-child(4),
-.samurai tr td:nth-child(7) {
-  border-left: 2px solid #3ea8b6;
-}
-.samurai tr:nth-child(10) td,
-.samurai tr:nth-child(13) td,
-.samurai tr:nth-child(16) td,
-.samurai tr:nth-child(19) td,
-.samurai tr:nth-child(4) td,
-.samurai tr:nth-child(7) td {
-  border-top: 2px solid #3ea8b6;
-}
 div.sudo_field.field_alt {
   background: #fff;
 }
@@ -314,8 +292,9 @@ div.sudo_field.field_alt {
 .sudotable div.sudo_field {
   padding: 0;
   font-size: 21px;
-  color: #b00;
+  color: gray;
   background: #fff;
+  font-family: Arial, Helvetica, sans-serif;
   font-weight: 700;
   border: 0;
   margin: 0;
@@ -846,7 +825,7 @@ h2.game span {
 }
 .sudo-header {
   background-color: #3ea8b6;
-  padding: 20px;
+  padding: 10px 20px;
   display: flex;
   gap: 20px;
   flex-direction: row;
@@ -864,11 +843,17 @@ h2.game span {
   font-size: 40px;
 }
 .sudo-header__logo {
-  width: 48px;
-  height: 48px;
+  width: 40px;
+  height: 40px;
 }
 .sudo-header__login {
   margin-left: auto;
+  margin-bottom: 0;
+  appearance: none;
+  border: 0;
+  background: none;
+  text-transform: uppercase;
+  padding: 10px;
   cursor: pointer;
 }
 .sudo-keyboard {
@@ -876,6 +861,7 @@ h2.game span {
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
   gap: 10px;
+  margin: 15px 0;
 }
 .sudo-keyboard__key {
   background-color: #eaeef4;
@@ -1023,6 +1009,9 @@ h2.game span {
   border: 1px solid #e4b50b;
   background-color: #e4b50b;
   color: white;
+}
+.sudo-button--width100 {
+  width: 100%;
 }
 .sudo-modal {
   display: none;
@@ -1196,15 +1185,15 @@ a {
 .sudo-info {
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  align-items: space-around;
+  justify-content: space-between;
+  align-items: center;
   gap: 30px;
-  margin-bottom: 12px;
+  margin-bottom: 15px;
 }
 .sudo-info p {
   margin: 0;
 }
-.sudo-info button {
+.sudo-info__timer-controls button {
   appearance: none;
   border: none;
   outline: none;
