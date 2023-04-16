@@ -2,7 +2,7 @@
  * Rutas a BBDD
  */
 const express = require('express');
-const Puzzle = require('../models/puzzle.js') 
+const Puzzle = require('../models/puzzle.js');
 const router = express.Router();
 module.exports = router;
 

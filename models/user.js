@@ -18,8 +18,7 @@ const userSchema = mongoose.Schema({
   },
   password: {
     type: String,
-    required: true
-    minlength:8
+    required: true,
   },
   token: {
     type: String
@@ -43,12 +42,11 @@ const userSchema = mongoose.Schema({
 });
 
 /* Método para guardar nuevo usuario */
-userSchema.pre('save', (next) => {
+userSchema.pre('save', function(next) {
   const user = this;
   if (user.isModified('password')) {
     bcrypt.genSalt(salt, (err, salt) => {
       if (err) return next(err);
-
       bcrypt.hash(user.password, salt, (err, hash) => {
         if (err) return next(err);
         user.password = hash;
@@ -61,7 +59,7 @@ userSchema.pre('save', (next) => {
 });
 
 /* Método para comprobar hash de contraseña */
-userSchema.methods.comparePassword = (password, cb) => {
+userSchema.methods.comparePassword = function(password, cb) {
   bcrypt.compare(password, this.password, (err, isMatch) => {
     if (err) return cb(next);
     cb(null, isMatch);
@@ -69,19 +67,19 @@ userSchema.methods.comparePassword = (password, cb) => {
 }
 
 /* Método para generar token */
-userSchema.methods.generateToken = (cb) => {
+userSchema.methods.generateToken = function(cb) {
   const user = this;
   const token = jwt.sign(user._id.toHexString(), SECRET);
 
   user.token = token;
   user.save((err, user) => {
-    if err return cb(err);
+    if (err) return cb(err);
     cb(null, user);
   });
 }
 
 /* Método para encontrar un token, nos confirma si un usuario ha iniciado sesión */
-userSchema.statics.findByToken = (token, cb) => {
+userSchema.statics.findByToken = function(token, cb) {
   const user = this;
   jwt.verify(token, SECRET, (err, decode) => {
     user.findOne({"_id": decode, "token": token}, (err, user) => {
@@ -92,7 +90,7 @@ userSchema.statics.findByToken = (token, cb) => {
 }
 
 /* Método para borrar token si el usuario cierra la sesión */
-userSchema.methods.deleteToken = (token, cb) => {
+userSchema.methods.deleteToken = function(token, cb) {
   const user = this;
   user.update({$unset : {token : 1}}, (err, user) => {
     if (err) return cb(err);
