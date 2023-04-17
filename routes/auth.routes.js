@@ -1,10 +1,13 @@
 /*
- * Declaración de las rutas para autentificación
+ * Rutas para autentificación en BBDD
  */
-const express = require('express');
-const router = express.Router();
-const User = require('../models/user.js');
 
+/* Módulos */
+const express = require('express');
+const router  = express.Router();
+const User    = require('../models/user.js');
+
+/* Función para buscar token válido */
 const auth = (req, res, next) => {
   const token = req.cookies.auth;
   User.findByToken(token, (err, user) => {

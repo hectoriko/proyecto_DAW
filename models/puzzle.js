@@ -1,6 +1,7 @@
 /*
  * Esquema de los puzles en la base de datos.
  */
+
 const mongoose = require('mongoose');
 
 /*
@@ -31,4 +32,5 @@ const puzzleSchema = mongoose.Schema({
     // }
 });
 
+/* Exports */
 module.exports = mongoose.model('Puzzle', puzzleSchema);

@@ -1,14 +1,15 @@
 /*
- * Rutas a BBDD
+ * Rutas a BBDD para puzles
  */
-const express = require('express');
-const Puzzle = require('../models/puzzle.js');
-const router = express.Router();
-module.exports = router;
+
+/* Módulos */
+const express  = require('express');
+const Puzzle   = require('../models/puzzle.js');
+const router   = express.Router();
 
 /*
  * Esta ruta nos permite obtener de la BBDD un objeto puzzle del nivel pasado
- * como parametro, por ahora tenemos:
+ * como parametro:
  * /api/getRandom/hard
  * /api/getRandom/medium
  * /api/getRandom/easy
@@ -16,9 +17,9 @@ module.exports = router;
 router.get('/getRandom/:level', async (req, res) => {
     try {
         const level = req.params.level;
-        await Puzzle.countDocuments({level: level}).exec((err, count) => {
+        await Puzzle.countDocuments({level: level}).exec((_err, count) => {
             const random = Math.floor(Math.random() * count);
-            Puzzle.findOne({level: level}).skip(random).exec((err, puzzle) => {
+            Puzzle.findOne({level: level}).skip(random).exec((_err, puzzle) => {
                 res.json(puzzle);
             });
         });
@@ -28,7 +29,7 @@ router.get('/getRandom/:level', async (req, res) => {
 });
 
 /* Ruta a todos los objetos puzzle en la BBDD. */
-router.get('/getAll', async (req, res) => {
+router.get('/getAll', async (_req, res) => {
     try {
         const puzzles = await Puzzle.find();
         res.json(puzzles);
@@ -37,3 +38,5 @@ router.get('/getAll', async (req, res) => {
     }
 });
 
+/* Exports */
+module.exports = router;

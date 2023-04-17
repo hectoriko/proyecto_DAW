@@ -1,14 +1,15 @@
 /*
  * Esquema de usuarios en la base de datos.
  */
-const mongoose = require('mongoose');
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
-const salt = 8;
-const SECRET = process.env.SECRET;
-require('dotenv').config()
 
-/* El modelo de usuarios */
+/* Módulos */
+const mongoose  = require('mongoose');
+const jwt       = require('jsonwebtoken');
+const bcrypt    = require('bcrypt');
+const salt      = 8;
+const SECRET    = process.env.SECRET;
+
+/* Modelo de usuarios */
 const userSchema = mongoose.Schema({
   username: {
     type: String,
@@ -41,6 +42,14 @@ const userSchema = mongoose.Schema({
   //   required: true
   // }
 });
+
+// /* objeto para guardar tiempos de puzles */
+// class Puzzle_time {
+//   constructor(puzzle_id, time){
+//     this.puzzle_id = puzzle_id;
+//     this.time = time;
+//   }
+// }
 
 /* Método para guardar nuevo usuario */
 userSchema.pre('save', function(next) {
@@ -82,7 +91,7 @@ userSchema.methods.generateToken = function(cb) {
 /* Método para encontrar un token, nos confirma si un usuario ha iniciado sesión */
 userSchema.statics.findByToken = function(token, cb) {
   const user = this;
-  jwt.verify(token, SECRET, (err, decode) => {
+  jwt.verify(token, SECRET, (_err, decode) => {
     user.findOne({"_id": decode, "token": token}, (err, user) => {
       if (err) return cb(err);
       cb(null, user);
@@ -91,20 +100,13 @@ userSchema.statics.findByToken = function(token, cb) {
 }
 
 /* Método para borrar token si el usuario cierra la sesión */
-userSchema.methods.deleteToken = function(token, cb) {
+userSchema.methods.deleteToken = function(_token, cb) {
   const user = this;
   user.update({$unset : {token : 1}}, (err, user) => {
     if (err) return cb(err);
     cb(null, user);
   });
 }
-// /* objeto para guardar tiempos de puzles */
-// class Puzzle_time {
-//   constructor(puzzle_id, time){
-//     this.puzzle_id = puzzle_id;
-//     this.time = time;
-//   }
-// }
 
-
+/* Exports */
 module.exports = mongoose.model('User', userSchema);

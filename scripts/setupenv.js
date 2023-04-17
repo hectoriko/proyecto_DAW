@@ -2,9 +2,11 @@
  * Script para guardar nombre y constraseña de ATLAS. Una vez `prompt' tiene
  * los datos los guarda en variables en el archivo `.env'.
  */
-const fs = require('fs');
+
+/* Módulos */
+const fs       = require('fs');
 const readline = require('readline');
-const prompt = require('prompt');
+const prompt   = require('prompt');
 
 /* Aseguramos que no exista ya el archivo .env */
 if(fs.existsSync('.env')) {
@@ -12,9 +14,9 @@ if(fs.existsSync('.env')) {
   process.exit(1);
 }
 
-prompt.start();
 
 /* Pedimos y guardmaos el nombre de usuario y contraseña */
+prompt.start();
 prompt.get(['user', 'pass'], (err, res) => {
   if (err) {
     console.log(err);

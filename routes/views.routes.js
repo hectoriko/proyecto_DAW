@@ -1,12 +1,14 @@
 /*
- * Declaración de las rutas para views.html
+ * Declaración de las rutas para views/
  */
+
+/* Módulos */
 const express = require('express');
-const path = require('path')
-const router = express.Router();
+const path    = require('path')
+const router  = express.Router();
 
 /* Ruta a views/index.html*/
-router.get('/', (req, res) => {
+router.get('/', (_req, res) => {
   try {
     res.sendFile(path.join(__dirname, '..', '/views/index.html'))
   } catch(err) {
@@ -14,14 +16,17 @@ router.get('/', (req, res) => {
   }
 });
 
-/* Ruta a todo el resto de páginas .html en views/ */
+/*
+ * Ruta a todo el resto de páginas. Esto funciona para cualquier archivo .html
+ * en la carpeta de views.
+ */
 router.get('/:page', (req, res) => {
-    try {
-        const page = req.params.page;
-        res.sendFile(path.join(__dirname, '..', `/views/${page}.html`))
-    } catch(err) {
-        res.status(404).json({message: err.message});
-    }
+  try {
+    const page = req.params.page;
+    res.sendFile(path.join(__dirname, '..', `/views/${page}.html`))
+  } catch(err) {
+    res.status(404).json({message: err.message});
+  }
 });
 
 /* EXPORTS */
