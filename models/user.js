@@ -23,6 +23,12 @@ const userSchema = mongoose.Schema({
   token: {
     type: String
   },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+    trim: true,
+  },
 
   // solved_puzzles: {
   //   type: Array

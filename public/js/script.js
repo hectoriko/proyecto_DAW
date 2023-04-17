@@ -35,9 +35,21 @@ setTimeout(function () {
     checkCell();
     checkSudoku();
   }
-  function preloadSudoku() {
-    failCount = 0;
-    const chosenLvl = 'easy';
+
+  function updateFailCount(num) {
+    // failCount = num;
+    let failElement = document.querySelector(".contador-fallos");
+    failElement.textContent = num;
+  }
+
+  function preloadSudoku(levelParam) {
+
+    updateFailCount(0)
+
+    const chosenLvl =  levelParam || 'easy';
+
+    const activeButton = document.querySelector(".sudo-button--bubble-active")
+    if (activeButton) activeButton.classList.remove("sudo-button--bubble-active");
 
     const levelButton = document.querySelector(`.js-levels .js-button-lvl[data-level='${chosenLvl}']`);
     // Mark button as active
@@ -165,6 +177,7 @@ setTimeout(function () {
     else {
       selectedCell.classList.add("is-wrong");
       failCount++;
+      updateFailCount(failCount)
       handleFailCount();
     }
     // TODO: Add no-way class
@@ -196,20 +209,20 @@ setTimeout(function () {
   function calculatePoints(level, timeTaken, multiplier) {
     // Max points that can be earned according to difficulty
     const maxPoints = level === "easy"
-    ? 1000
+    ? 500
     : level === "medium"
-    ? 1500
+    ? 1000
     : level === "hard"
     ? 2000
     : 0; // 0 as fallback
 
     // Time it should take according to difficulty
     const referenceTime = level === "easy"
-    ? 60 * 10 // 10 minutes for easy
+    ? 60 * 5 // 10 minutes for easy
     : level === "medium"
-    ? 60 * 20 // 20 minutes for medium
+    ? 60 * 10 // 20 minutes for medium
     : level === "hard"
-    ? 60 * 30 // 30 minutes for hard
+    ? 60 * 20 // 30 minutes for hard
     : 60 * 60; // 60 minutes as fallback
 
     // calculate the points based on the time taken and the multiplier
@@ -243,8 +256,10 @@ setTimeout(function () {
       : level === "hard"
       ? 2
       : 0;
-      
+
       const points = calculatePoints(level, timeTaken, multiplier)
+
+      // TODO: Send points to DB
 
         const sudokuOkModal = document.querySelector(".js-modal-sudoku-ok");
 
@@ -272,7 +287,9 @@ setTimeout(function () {
         button.textContent;
 
       // Reset failure count
-      failCount = 0;
+      // failCount = 0;
+      updateFailCount(0)
+
 
       // Reset timer & Start timer
       // resetTimer();
@@ -301,7 +318,19 @@ setTimeout(function () {
     key.addEventListener("click", e => handleNumberInput(e, key)),
   );
 
+  // window.addEventListener("keyup", e => {
+
+
   window.addEventListener("keyup", e => {
+
+    const modals = document.querySelectorAll(".sudo-modal")
+    let modalIsOpen = false;
+    modals.forEach(modal => {
+      if (modal.classList.contains("sudo-modal--active")) modalIsOpen = true;
+    })
+
+    if (modalIsOpen) return;
+
     // Check key is 1 to 9
     const regex = /^[1-9]$/;
     if (!regex.test(e.key)) return;
@@ -343,7 +372,27 @@ setTimeout(function () {
 
     hideModal(gameOverModal);
 
-    setTimeout(() => preloadSudoku(), 1500);
+    setTimeout(() => preloadSudoku(), 500);
+
+  });
+
+  const closeSudokuOkModal = document.querySelector(
+    ".js-modal-sudoku-ok .js-close-modal",
+  );
+
+  closeSudokuOkModal.addEventListener("click", function () {
+    const sudokuOkModal = document.querySelector(".js-modal-sudoku-ok");
+
+    hideModal(sudokuOkModal);
+
+    const activeLevel =  document
+    .querySelector(".sudo-button--bubble-active")
+    .getAttribute("data-level");
+
+    let nextLevel = '';
+    activeLevel === "easy" ? nextLevel = "medium" : activeLevel === "medium" ? nextLevel = "hard" : activeLevel === "hard" ? nextLevel = "hard" : "easy"
+
+    setTimeout(() => preloadSudoku(nextLevel), 500);
 
   });
 
