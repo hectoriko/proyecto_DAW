@@ -62,4 +62,3 @@
    ```sh
    $ npm run test
    ```
-- BORRAR
