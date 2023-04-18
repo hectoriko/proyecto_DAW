@@ -29,6 +29,7 @@
                 <button id="startTimer">▶️</button>
                 <!-- <button id="resetTimer">Reset</button> -->
               </div>
+              <p class="sudo-info__fallos">Llevas <span class="contador-fallos">0</span>/3 fallos.</p>
             </div>
 
 
@@ -56,6 +57,11 @@
           </main>
 
           <aside class="sudo-aside">
+
+            <div class="sudo-aside__group user-info">
+              <h2>Bienvenido, <span class="username"></span></h2>
+            </div>
+
             <div class="sudo-aside__group">
               <h2>Ranking</h2>
               <ul class="sudo-ranking">
@@ -76,7 +82,7 @@
                 </li>
               </ul>
             </div>
-            <div class="sudo-aside__group">
+            <div class="sudo-aside__group sudo-aside__group--disabled">
               <h2>Amigos</h2>
               <ul>
                 <li>
@@ -117,6 +123,55 @@
             value="Login"
           />
         </form>
+      </div>
+    </div>
+
+    <!-- ! Modal registro -->
+    <div class="sudo-modal js-modal-register">
+      <div class="sudo-modal__overlay"></div>
+      <div class="sudo-modal__modal-wrapper">
+        <h2 class="sudo-modal__title">Registrarse</h2>
+        <span class="sudo-modal__close js-close-modal">&times;</span>
+
+        <form class="sudo-modal__form" action="" method="">
+          <input
+            class="sudo-modal__input js-email"
+            type="email"
+            placeholder="E-mail"
+            name="user_email"
+          />
+          <input
+            class="sudo-modal__input js-user"
+            type="text"
+            placeholder="Usuario"
+            name="user_name"
+          />
+          <input
+            class="sudo-modal__input js-password"
+            type="password"
+            placeholder="Contraseña"
+            name="password_hash"
+          />
+          <input
+            class="sudo-modal__button sudo-button sudo-button--filled js-send-register"
+            type="submit"
+            value="Register"
+          />
+        </form>
+      </div>
+    </div>
+
+    <!-- ! Modal registro ok -->
+    <div class="sudo-modal js-modal-register-ok">
+      <div class="sudo-modal__overlay"></div>
+      <div class="sudo-modal__modal-wrapper">
+        <h2 class="sudo-modal__title">Registrarse</h2>
+        <span class="sudo-modal__close js-close-modal">&times;</span>
+
+        <div>
+          <p>Te has registado correctamente.</p>
+        </div>
+
       </div>
     </div>
 

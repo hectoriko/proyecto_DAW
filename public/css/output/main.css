@@ -839,15 +839,18 @@ h2.game span {
   gap: 10px;
   align-items: center;
 }
-.sudo-header__title {
-  font-size: 40px;
-}
 .sudo-header__logo {
   width: 40px;
   height: 40px;
 }
-.sudo-header__login {
+.sudo-header__title {
+  font-size: 40px;
+}
+.sudo-header__links {
   margin-left: auto;
+}
+.sudo-header__login {
+  margin-left: 20px;
   margin-bottom: 0;
   appearance: none;
   border: 0;
@@ -952,6 +955,15 @@ h2.game span {
 }
 .sudo-aside__group--disabled {
   opacity: 0.5;
+}
+.sudo-aside .user-info {
+  display: none;
+}
+.sudo-aside .user-info--show {
+  display: block;
+}
+.sudo-aside .user-info .username {
+  color: #e4b50b;
 }
 .sudo-ranking__user {
   display: flex;
@@ -1192,10 +1204,12 @@ a {
 .sudo-info {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   gap: 30px;
   margin-bottom: 15px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 .sudo-info p {
   margin: 0;
@@ -1207,7 +1221,6 @@ a {
   background-color: transparent;
 }
 .sudo-info__level {
-  font-family: Arial, Helvetica, sans-serif;
   color: #6C6C6C;
   font-size: clamp(1rem, 1.3vw, 1.2rem);
 }
@@ -1217,4 +1230,8 @@ a {
 }
 .sudo-info__timer {
   font-family: monospace;
+}
+.sudo-info__fallos {
+  color: #6C6C6C;
+  font-size: 14px;
 }
