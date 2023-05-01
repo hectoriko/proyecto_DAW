@@ -52,7 +52,7 @@
    ```sh
    $ npm start
    ```
-   
+
 - Abrir navegador e introducir la direccion:
 
    localhost:3000
@@ -62,3 +62,6 @@
    ```sh
    $ npm run test
    ```
+
+### Estado en Netlify :
+[![Netlify Status](https://api.netlify.com/api/v1/badges/785aa242-4211-4117-b9d2-a7a902686fc8/deploy-status)](https://app.netlify.com/sites/sudokle/deploys)
