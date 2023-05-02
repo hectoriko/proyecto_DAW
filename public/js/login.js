@@ -34,6 +34,7 @@ export function handleRegister() {
   const username = document.querySelector(".js-modal-register .js-user").value;
   const password = document.querySelector(".js-modal-register .js-password").value;
   const email = document.querySelector(".js-modal-register .js-email").value;
+  const points = 0;
   // console.log({ username, password });
 
   var myHeaders = new Headers();
@@ -43,7 +44,7 @@ export function handleRegister() {
   var requestOptions = {
     method: 'POST',
     headers: myHeaders,
-    body: JSON.stringify({ username, password, email }),
+    body: JSON.stringify({ username, password, email, points }),
     redirect: 'follow'
   };
 
