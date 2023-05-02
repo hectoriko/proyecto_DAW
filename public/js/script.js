@@ -6,32 +6,34 @@ import { showModal, hideModal } from "./modal.js";
 
 // const addTemplate = require('./insert_templates.js');
 
-  async function getRanking() {
-    await fetch(`/api/getRanking/`)
-      .then(response => response.json())
-      .then(data => populateRanking(data))
-      .then(data => data)
-      .catch(e => console.error(e));
-  }
-  getRanking()
+async function getRanking() {
+  await fetch(`/auth/getRanking/`)
+    .then(response => response.json())
+    .then(data => {
+      populateRanking(data)
+      return data
+    })
+    .catch(e => console.error(e));
+}
+getRanking();
 
-  function populateRanking(ranking) {
-    const rankingWrapper = document.querySelector(".sudo-ranking");
-    const rankingLength = 3;
-    let template = '';
+function populateRanking(ranking) {
+  const rankingWrapper = document.querySelector(".sudo-ranking");
+  const rankingLength = 3;
+  let template = '';
 
-    rankingWrapper.innerHTML = '';
-    ranking.forEach((user, i) => {
-      if (i >= rankingLength) return;
-      template += /*html*/`
-      <li class="sudo-ranking__user">
-      <span class="sudo-ranking__posicion">${++i}</span>
-          <span class="sudo-ranking__nombre">${user.username}</span>
-          <span class="sudo-ranking__puntos">${user._id} pts</span>
-        </li>`
-    });
-    rankingWrapper.innerHTML = template;
-  }
+  rankingWrapper.innerHTML = '';
+  ranking.forEach((user, i) => {
+    if (i >= rankingLength) return;
+    template += /*html*/`
+    <li class="sudo-ranking__user">
+    <span class="sudo-ranking__posicion">${++i}</span>
+        <span class="sudo-ranking__nombre">${user.username}</span>
+        <span class="sudo-ranking__puntos">${user._id} pts</span>
+      </li>`
+  });
+  rankingWrapper.innerHTML = template;
+}
 
 // TODO: Do something about this setTimeOut
 setTimeout(function () {
