@@ -287,8 +287,11 @@ setTimeout(function () {
       : 0;
 
       const points = calculatePoints(level, timeTaken, multiplier)
+      updatePoints(points)
 
-      // TODO: Send points to DB
+      setTimeout(() => {
+        getRanking();
+      }, 1000);
 
         const sudokuOkModal = document.querySelector(".js-modal-sudoku-ok");
 
