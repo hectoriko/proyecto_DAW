@@ -42,10 +42,10 @@ const userSchema = mongoose.Schema({
   //   type: Date,
   //   required: true
   // },
-  // points: {
-  //   type: Number,
-  //   required: true
-  // }
+  points: {
+    type: Number,
+    required: false
+  }
 });
 
 /* Método para guardar nuevo usuario */

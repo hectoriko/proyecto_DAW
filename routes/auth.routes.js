@@ -48,6 +48,27 @@ router.post('/login', (req, res) => {
   });
 });
 
+router.post('/update-points', (req, res) => {
+  const token = req.cookies.auth;
+  User.findByToken(token, (err, user) => {
+    if (err) return res(err);
+    if (!user) return res.status(401).json({
+      error: true,
+      message: "Unauthorized access"
+    });
+    const newPoints = req.body.points;
+    user.points = newPoints;
+    user.save((err, updatedUser) => {
+      if (err) return res.status(400).send(err);
+      res.json({
+        success: true,
+        message: "Points updated successfully",
+        user: updatedUser
+      });
+    });
+  });
+});
+
 /* Ruta para crear nuevo usuario */
 router.post('/register', (req, res) => {
   const new_user = new User(req.body);
@@ -72,6 +93,33 @@ router.get('/logout', auth, function(req, res) {
     if (err) return res.status(400).send(err);
     res.sendStatus(200);
   });
+});
+
+/* Ruta a todos los usuarios */
+// router.get('/getUsers', async (req, res) => {
+//     try {
+//         let users = await User.find();
+//         res.json(users);
+//     } catch(err) {
+//         res.status(500).json({message: err.message});
+//     }
+// });
+
+/* Ruta a todos los por orden de puntos */
+router.get('/getRanking', async (req, res) => {
+  try {
+      let users = await User.find();
+      // Sort users by points
+      users.sort((a, b) =>  {
+        if (a.points === null || a.points === undefined || a.points === "") a.points = 0;
+        if (b.points === null || b.points === undefined || b.points === "") b.points = 0;
+        return b.points - a.points
+      })
+
+      res.json(users);
+  } catch(err) {
+      res.status(500).json({message: err.message});
+  }
 });
 
 /* EXPORTS */
