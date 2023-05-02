@@ -74,5 +74,27 @@ router.get('/logout', auth, function(req, res) {
   });
 });
 
+/* Ruta a todos los usuarios */
+// router.get('/getUsers', async (req, res) => {
+//     try {
+//         let users = await User.find();
+//         res.json(users);
+//     } catch(err) {
+//         res.status(500).json({message: err.message});
+//     }
+// });
+
+/* Ruta a todos los por orden de puntos */
+router.get('/getRanking', async (req, res) => {
+  try {
+      let users = await User.find();
+      // Sort users by points
+      users = users.sort((a, b) => b.points - a.points);
+      res.json(users);
+  } catch(err) {
+      res.status(500).json({message: err.message});
+  }
+});
+
 /* EXPORTS */
 module.exports = router;
