@@ -110,7 +110,12 @@ router.get('/getRanking', async (req, res) => {
   try {
       let users = await User.find();
       // Sort users by points
-      users = users.sort((a, b) => b.points - a.points);
+      users.sort((a, b) =>  {
+        if (a.points === null || a.points === undefined || a.points === "") a.points = 0;
+        if (b.points === null || b.points === undefined || b.points === "") b.points = 0;
+        return b.points - a.points
+      })
+
       res.json(users);
   } catch(err) {
       res.status(500).json({message: err.message});
