@@ -48,6 +48,27 @@ router.post('/login', (req, res) => {
   });
 });
 
+router.post('/update-points', (req, res) => {
+  const token = req.cookies.auth;
+  User.findByToken(token, (err, user) => {
+    if (err) return res(err);
+    if (!user) return res.status(401).json({
+      error: true,
+      message: "Unauthorized access"
+    });
+    const newPoints = req.body.points;
+    user.points = newPoints;
+    user.save((err, updatedUser) => {
+      if (err) return res.status(400).send(err);
+      res.json({
+        success: true,
+        message: "Points updated successfully",
+        user: updatedUser
+      });
+    });
+  });
+});
+
 /* Ruta para crear nuevo usuario */
 router.post('/register', (req, res) => {
   const new_user = new User(req.body);
