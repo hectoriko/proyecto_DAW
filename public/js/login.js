@@ -23,6 +23,7 @@ export function handleLogin() {
       if (username !== '') {
         document.querySelector('.username').textContent = user.username;
         document.querySelector('.username').setAttribute('data-userId', user.id);
+        document.querySelector('.userpoints').textContent = `Tus puntos: ${user.userpoints} pts`;
 
         document.querySelector('.js-login').classList.add('hidden');
         document.querySelector('.js-login').classList.remove('shown');
@@ -39,25 +40,25 @@ export function handleLogin() {
     .catch(error => console.log('error', error));
   }
   
-export function handleRegister() {
-  const username = document.querySelector(".js-modal-register .js-user").value;
-  const password = document.querySelector(".js-modal-register .js-password").value;
-  const email = document.querySelector(".js-modal-register .js-email").value;
-  const points = 0;
-  // console.log({ username, password });
-  
-  var myHeaders = new Headers();
-  myHeaders.append("Content-Type", "application/json");
-  // myHeaders.append("Cookie", "auth=eyJhbGciOiJIUzI1NiJ9.NjQzY2RmZmRmMmI5ZGE1ODEzODUzYTkw.PvZ1uMewI1NhnrU-ZZ0feuYJCYWCyUa09o-cIPBbENc");
-  
-  var requestOptions = {
-    method: 'POST',
-    headers: myHeaders,
-    body: JSON.stringify({ username, password, email, points }),
-    redirect: 'follow'
-  };
-
-  fetch("/auth/register", requestOptions)
+  export function handleRegister() {
+    const username = document.querySelector(".js-modal-register .js-user").value;
+    const password = document.querySelector(".js-modal-register .js-password").value;
+    const email = document.querySelector(".js-modal-register .js-email").value;
+    const points = 0;
+    // console.log({ username, password });
+    
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    // myHeaders.append("Cookie", "auth=eyJhbGciOiJIUzI1NiJ9.NjQzY2RmZmRmMmI5ZGE1ODEzODUzYTkw.PvZ1uMewI1NhnrU-ZZ0feuYJCYWCyUa09o-cIPBbENc");
+    
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: JSON.stringify({ username, password, email, points }),
+      redirect: 'follow'
+    };
+    
+    fetch("/auth/register", requestOptions)
     .then(response => response.text())
     .then(result => {
       const loginRegistroOk = document.querySelector(".js-modal-register-ok");
@@ -70,14 +71,14 @@ export function handleRegister() {
     })
     .catch(error => console.log('error', error));
   }
-
+  
   export function handleLogout() {
     var requestOptions = {
-    method: 'POST',
-    redirect: 'follow'
-  };
-  
-  fetch("/auth/logout", requestOptions)
+      method: 'POST',
+      redirect: 'follow'
+    };
+    
+    fetch("/auth/logout", requestOptions)
     .then(response => response.text())
     .then(result => {
       console.log(result);
@@ -90,23 +91,23 @@ export function handleRegister() {
 
       document.querySelector('.username').textContent = '';
       document.querySelector('.username').removeAttribute('data-userId');
+      document.querySelector('.userPoints').textContent = '';
       document.querySelector('.user-info').classList.remove('user-info--show');
-
     })
     .catch(error => console.error(err));
-}
+  }
 
 
-setTimeout(() => {
-  // LOGIN
-  const openLoginModal = document.querySelector(".js-open-login-modal");
-  openLoginModal.addEventListener("click", function () {
-    const loginModal = document.querySelector(".js-modal-login");
-    showModal(loginModal);
-  });
+  setTimeout(() => {
+    // LOGIN
+    const openLoginModal = document.querySelector(".js-open-login-modal");
+    openLoginModal.addEventListener("click", function () {
+      const loginModal = document.querySelector(".js-modal-login");
+      showModal(loginModal);
+    });
 
-  const closeLoginModal = document.querySelector(
-    ".js-modal-login .js-close-modal",
+    const closeLoginModal = document.querySelector(
+      ".js-modal-login .js-close-modal",
   );
   closeLoginModal.addEventListener("click", function () {
     const loginModal = document.querySelector(".js-modal-login");

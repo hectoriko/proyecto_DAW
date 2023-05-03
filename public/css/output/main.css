@@ -973,6 +973,12 @@ h2.game span {
 .sudo-aside .user-info .username {
   color: #e4b50b;
 }
+.sudo-aside .user-info .userpoints {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #3ea8b6;
+  color: #6C6C6C;
+  font-size: clamp(1rem, 1.3vw, 1.2rem);
+}
 .sudo-ranking__user {
   display: flex;
   flex-direction: row;
