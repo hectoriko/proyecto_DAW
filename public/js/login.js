@@ -19,8 +19,11 @@ export function handleLogin() {
     .then(response => response.text())
     .then(result => {
       document.querySelector('.user-info').classList.add('user-info--show');
-      const username = JSON.parse(result).username;
-      if (username !== '') document.querySelector('.username').textContent = username;
+      const user = JSON.parse(result)
+      if (username !== '') {
+        document.querySelector('.username').textContent = user.username;
+        document.querySelector('.username').setAttribute('data-userId', user.id);
+      }
 
       setTimeout(() => {
         const loginModal = document.querySelector(".js-modal-login");
