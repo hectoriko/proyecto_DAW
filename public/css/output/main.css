@@ -859,6 +859,14 @@ h2.game span {
   padding: 10px;
   cursor: pointer;
 }
+.sudo-header .js-login.hidden,
+.sudo-header .js-logout.hidden {
+  display: none;
+}
+.sudo-header .js-login.shown,
+.sudo-header .js-logout.shown {
+  display: inline-block;
+}
 .sudo-keyboard {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
