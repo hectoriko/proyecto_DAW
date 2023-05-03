@@ -57,7 +57,7 @@ router.post('/update-points', (req, res) => {
       message: "Unauthorized access"
     });
     const newPoints = req.body.points;
-    user.points = newPoints;
+    user.points = user.points + newPoints;
     user.save((err, updatedUser) => {
       if (err) return res.status(400).send(err);
       res.json({
@@ -68,6 +68,7 @@ router.post('/update-points', (req, res) => {
     });
   });
 });
+
 
 /* Ruta para crear nuevo usuario */
 router.post('/register', (req, res) => {
