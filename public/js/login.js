@@ -31,19 +31,19 @@ export function handleLogin() {
       }, 1500)
     })
     .catch(error => console.log('error', error));
-}
-
+  }
+  
 export function handleRegister() {
   const username = document.querySelector(".js-modal-register .js-user").value;
   const password = document.querySelector(".js-modal-register .js-password").value;
   const email = document.querySelector(".js-modal-register .js-email").value;
   const points = 0;
   // console.log({ username, password });
-
+  
   var myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
   // myHeaders.append("Cookie", "auth=eyJhbGciOiJIUzI1NiJ9.NjQzY2RmZmRmMmI5ZGE1ODEzODUzYTkw.PvZ1uMewI1NhnrU-ZZ0feuYJCYWCyUa09o-cIPBbENc");
-
+  
   var requestOptions = {
     method: 'POST',
     headers: myHeaders,
@@ -56,13 +56,32 @@ export function handleRegister() {
     .then(result => {
       const loginRegistroOk = document.querySelector(".js-modal-register-ok");
       const registerModal = document.querySelector(".js-modal-register");
-
+      
       hideModal(registerModal);
-
+      
       setTimeout(() => { showModal(loginRegistroOk) }, 1000)
       setTimeout(() => { hideModal(loginRegistroOk) }, 4000)
     })
     .catch(error => console.log('error', error));
+  }
+
+  export function handleLogout() {
+    var requestOptions = {
+    method: 'POST',
+    redirect: 'follow'
+  };
+  
+  fetch("/auth/logout", requestOptions)
+    .then(response => response.text())
+    .then(result => {
+      console.log(result);
+
+      document.querySelector('.username').textContent = '';
+      document.querySelector('.username').removeAttribute('data-userId');
+      document.querySelector('.user-info').classList.remove('user-info--show');
+
+    })
+    .catch(error => console.error(err));
 }
 
 
@@ -108,4 +127,11 @@ setTimeout(() => {
     e.preventDefault();
     handleRegister();
   });
+
+  // LOGOUT
+  const logout = document.querySelector(".js-logout");
+  logout.addEventListener("click", function (e) {
+    e.preventDefault();
+    handleLogout();
+  })
 }, 2000);

@@ -48,6 +48,32 @@ router.post('/login', (req, res) => {
   });
 });
 
+/* Ruta para cerrar sesión de usuario */
+// router.get('/logout', auth, function(req, res) {
+//   req.user.deleteToken(req.token, (err, _user) => {
+//     if (err) return res.status(400).send(err);
+//     res.sendStatus(200);
+//   });
+// });
+
+router.post('/logout', (req, res) => {
+  const token = req.cookies.auth;
+  User.findByToken(token, (err, user) => {
+    if (err) return res(err);
+    if (!user) return res.status(400).json({
+      error: true,
+      message: "Sesión no ha sido inicializada"
+    });
+    user.deleteToken(token, (err, user) => {
+      if (err) return res(err);
+      res.clearCookie('auth').json({
+        isAuth: false,
+        message: "Sesión ha sido cerrada"
+      });
+    });
+  });
+});
+
 router.post('/updatePoints', (req, res) => {
   const token = req.cookies.auth;
   User.findByToken(token, (err, user) => {
@@ -85,14 +111,6 @@ router.post('/register', (req, res) => {
         user : doc
       });
     });
-  });
-});
-
-/* Ruta para cerrar sesión de usuario */
-router.get('/logout', auth, function(req, res) {
-  req.user.deleteToken(req.token, (err, _user) => {
-    if (err) return res.status(400).send(err);
-    res.sendStatus(200);
   });
 });
 
