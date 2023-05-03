@@ -41,7 +41,8 @@ router.post('/login', (req, res) => {
         res.cookie('auth', user.token).json({
           isAuth : true,
           id : user._id,
-          username : user.username
+          username : user.username,
+          userpoints : user.points
         });
       });
     });
