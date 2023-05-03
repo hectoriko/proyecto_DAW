@@ -23,6 +23,12 @@ export function handleLogin() {
       if (username !== '') {
         document.querySelector('.username').textContent = user.username;
         document.querySelector('.username').setAttribute('data-userId', user.id);
+
+        document.querySelector('.js-login').classList.add('hidden');
+        document.querySelector('.js-login').classList.remove('shown');
+
+        document.querySelector('.js-logout').classList.add('shown');
+        document.querySelector('.js-logout').classList.remove('hidden');
       }
 
       setTimeout(() => {
@@ -75,6 +81,12 @@ export function handleRegister() {
     .then(response => response.text())
     .then(result => {
       console.log(result);
+
+      document.querySelector('.js-logout').classList.add('hidden');
+      document.querySelector('.js-logout').classList.remove('shown');
+
+      document.querySelector('.js-login').classList.add('shown');
+      document.querySelector('.js-login').classList.remove('hidden');
 
       document.querySelector('.username').textContent = '';
       document.querySelector('.username').removeAttribute('data-userId');
