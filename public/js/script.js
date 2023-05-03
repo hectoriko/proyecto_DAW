@@ -28,7 +28,7 @@ export function updatePoints(points) {
     redirect: 'follow'
   };
 
-  fetch(`/auth/update-points`, requestOptions)
+  fetch(`/auth/updatePoints`, requestOptions)
     .then(response => response.text())
     .then(result => console.log(result))
     .catch(error => console.log('error', error));
@@ -43,11 +43,11 @@ function populateRanking(ranking) {
   ranking.forEach((user, i) => {
     if (i >= rankingLength) return;
     template += /*html*/`
-    <li class="sudo-ranking__user">
-    <span class="sudo-ranking__posicion">${++i}</span>
-        <span class="sudo-ranking__nombre">${user.username}</span>
-        <span class="sudo-ranking__puntos">${user.points} pts</span>
-      </li>`
+    <li class="sudo-ranking__user" data-userId='${user._id}'>
+      <span class="sudo-ranking__posicion">${++i}</span>
+      <span class="sudo-ranking__nombre">${user.username}</span>
+      <span class="sudo-ranking__puntos">${user.points} pts</span>
+    </li>`
   });
   rankingWrapper.innerHTML = template;
 }

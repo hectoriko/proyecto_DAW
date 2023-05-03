@@ -31,7 +31,7 @@ router.post('/login', (req, res) => {
         message : "Credeciales no validos"
       });
       user.comparePassword(req.body.password, (_err, isMatch) => {
-        if (!isMatch) return res.json({ 
+        if (!isMatch) return res.json({
           isAuth : false,
           message : "Credeciales no validos"
         });
@@ -48,7 +48,33 @@ router.post('/login', (req, res) => {
   });
 });
 
-router.post('/update-points', (req, res) => {
+/* Ruta para cerrar sesión de usuario */
+// router.get('/logout', auth, function(req, res) {
+//   req.user.deleteToken(req.token, (err, _user) => {
+//     if (err) return res.status(400).send(err);
+//     res.sendStatus(200);
+//   });
+// });
+
+router.post('/logout', (req, res) => {
+  const token = req.cookies.auth;
+  User.findByToken(token, (err, user) => {
+    if (err) return res(err);
+    if (!user) return res.status(400).json({
+      error: true,
+      message: "Sesión no ha sido inicializada"
+    });
+    user.deleteToken(token, (err, user) => {
+      if (err) return res(err);
+      res.clearCookie('auth').json({
+        isAuth: false,
+        message: "Sesión ha sido cerrada"
+      });
+    });
+  });
+});
+
+router.post('/updatePoints', (req, res) => {
   const token = req.cookies.auth;
   User.findByToken(token, (err, user) => {
     if (err) return res(err);
@@ -57,7 +83,7 @@ router.post('/update-points', (req, res) => {
       message: "Unauthorized access"
     });
     const newPoints = req.body.points;
-    user.points = newPoints;
+    user.points = user.points + newPoints;
     user.save((err, updatedUser) => {
       if (err) return res.status(400).send(err);
       res.json({
@@ -68,6 +94,7 @@ router.post('/update-points', (req, res) => {
     });
   });
 });
+
 
 /* Ruta para crear nuevo usuario */
 router.post('/register', (req, res) => {
@@ -84,14 +111,6 @@ router.post('/register', (req, res) => {
         user : doc
       });
     });
-  });
-});
-
-/* Ruta para cerrar sesión de usuario */
-router.get('/logout', auth, function(req, res) {
-  req.user.deleteToken(req.token, (err, _user) => {
-    if (err) return res.status(400).send(err);
-    res.sendStatus(200);
   });
 });
 
