@@ -31,7 +31,7 @@ router.post('/login', (req, res) => {
         message : "Credeciales no validos"
       });
       user.comparePassword(req.body.password, (_err, isMatch) => {
-        if (!isMatch) return res.json({ 
+        if (!isMatch) return res.json({
           isAuth : false,
           message : "Credeciales no validos"
         });
@@ -48,7 +48,7 @@ router.post('/login', (req, res) => {
   });
 });
 
-router.post('/update-points', (req, res) => {
+router.post('/updatePoints', (req, res) => {
   const token = req.cookies.auth;
   User.findByToken(token, (err, user) => {
     if (err) return res(err);

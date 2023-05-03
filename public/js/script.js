@@ -28,7 +28,7 @@ export function updatePoints(points) {
     redirect: 'follow'
   };
 
-  fetch(`/auth/update-points`, requestOptions)
+  fetch(`/auth/updatePoints`, requestOptions)
     .then(response => response.text())
     .then(result => console.log(result))
     .catch(error => console.log('error', error));
