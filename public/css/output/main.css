@@ -4,8 +4,14 @@
   background-color: lightgrey;
   display: none;
 }
+.highlighted-cell {
+  background-color: #eaf0f1 !important;
+}
+.same-num-cell {
+  background-color: #d8e8f9 !important;
+}
 .selected-cell {
-  background-color: #d9f6fa !important;
+  background-color: #baddff !important;
 }
 .is-right {
   color: #3a91e4 !important;
@@ -40,7 +46,7 @@
   padding: 0 15px;
 }
 #sudo_blur_content {
-  border-radius: 4px;
+  border-radius: 3px;
   background: #eee;
   padding: 0 20px;
   opacity: 0.85;
@@ -93,7 +99,7 @@
   left: 50%;
   background: #fff;
   border: 2px solid #6d8dcb;
-  border-radius: 4px;
+  border-radius: 3px;
   padding: 20px;
   width: 100%;
   max-width: 400px;
@@ -106,7 +112,7 @@
   left: 50%;
   background: #fff;
   border: 2px solid #6d8dcb;
-  border-radius: 4px;
+  border-radius: 3px;
   padding: 20px;
   width: 100%;
   max-width: 400px;
@@ -147,12 +153,12 @@
   margin: 0;
 }
 #tablero {
-  border-radius: 4px;
+  border-radius: 3px;
   background: #efefef;
   padding: 0;
 }
 a.sudo_link {
-  color: #3ea8b6;
+  color: #73a1d0;
 }
 .tiempo_controles {
   margin-bottom: 10px;
@@ -238,7 +244,7 @@ table.kids {
 table.sudotable {
   margin: 0 auto;
   text-align: center;
-  border: 2px solid #3ea8b6;
+  border: 2px solid #73a1d0;
   width: 100%;
   max-width: 400px;
   table-layout: fixed;
@@ -280,10 +286,10 @@ table.sudotable td.hidew {
   border: 1px solid #efefef !important;
 }
 table.sudotable td.vsep {
-  border-left: 2px solid #3ea8b6;
+  border-left: 2px solid #73a1d0;
 }
 table.sudotable td.hsep {
-  border-top: 2px solid #3ea8b6;
+  border-top: 2px solid #73a1d0;
 }
 div.sudo_field.field_alt {
   background: #fff;
@@ -293,7 +299,6 @@ div.sudo_field.field_alt {
   padding: 0;
   font-size: 21px;
   color: gray;
-  background: #fff;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 700;
   border: 0;
@@ -414,7 +419,7 @@ table.sudotable tr {
   border-collapse: collapse;
   margin: 0;
   padding: 0;
-  border: 1px solid #3ea8b6;
+  border: 1px solid #73a1d0;
 }
 #sudo_numbers div.sudo_field.white,
 #sudo_numbers_mega div.sudo_field.white {
@@ -470,7 +475,7 @@ div.sudo_header {
   color: #fff;
   font-size: 14px;
   font-weight: 700;
-  border-radius: 4px;
+  border-radius: 3px;
   margin-bottom: 5px;
   padding: 0 4px;
 }
@@ -541,7 +546,7 @@ select {
 #quees {
   padding: 20px;
   margin: 15px 0 15px 0;
-  border-radius: 4px;
+  border-radius: 3px;
   background: #efefef;
 }
 #quees p {
@@ -593,7 +598,7 @@ input[type=submit] {
 }
 form .submit input[type=submit] {
   background: #0877c0;
-  border: 1px solid #3ea8b6;
+  border: 1px solid #73a1d0;
   color: #fff;
   padding: 5px 10px;
 }
@@ -636,7 +641,7 @@ form .submit input[type=submit] {
   border: 0;
   margin-top: 20px;
   margin-bottom: 30px;
-  border-radius: 5px;
+  border-radius: 3px;
 }
 .bs-calltoaction > .row {
   display: table;
@@ -824,7 +829,7 @@ h2.game span {
   font-family: Open Sans;
 }
 .sudo-header {
-  background-color: #3ea8b6;
+  background-color: #73a1d0;
   padding: 10px 20px;
   display: flex;
   gap: 20px;
@@ -876,14 +881,14 @@ h2.game span {
 }
 .sudo-keyboard__key {
   background-color: #eaeef4;
-  background-color: #d9f6fa;
+  background-color: #e2e7ed;
   color: #0072e3;
   color: #6C6C6C;
   font-family: monospace;
   font-size: 16px;
   font-weight: bold;
   padding: 15px;
-  border-radius: 5px;
+  border-radius: 3px;
   text-align: center;
   cursor: pointer;
   transition: background-color 0.1s ease-in-out;
@@ -891,13 +896,13 @@ h2.game span {
 }
 .sudo-keyboard__key:hover {
   background-color: #b5becc;
-  background-color: #3ea8b6;
+  background-color: #73a1d0;
   color: #fff;
 }
 .color-box {
-  background-color: #d9f6fa;
+  background-color: #e2e7ed;
   padding: 20px;
-  border-radius: 25px;
+  border-radius: 3px;
 }
 .sudo-font-family {
   font-family: Arial, Helvetica, sans-serif;
@@ -905,20 +910,20 @@ h2.game span {
 .sudo-h2 {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
-  color: #3ea8b6;
+  color: #73a1d0;
   font-size: clamp(1.2rem, 2vw, 2rem);
   margin-bottom: 10px;
 }
 .sudo-h3 {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
-  color: #3ea8b6;
+  color: #73a1d0;
   font-size: clamp(1.1rem, 1.5vw, 1.6rem);
   margin-bottom: 10px;
 }
 .sudo-p {
   font-family: Arial, Helvetica, sans-serif;
-  color: #3ea8b6;
+  color: #73a1d0;
   color: #6C6C6C;
   font-size: clamp(1rem, 1.3vw, 1.2rem);
 }
@@ -929,20 +934,17 @@ h2.game span {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-}
-@media (min-width: 768px) {
-  .sudo-middle {
-    flex-direction: row;
-  }
-}
-.sudo-aside {
-  background-color: #d9f6fa;
+  display: grid;
+  grid-template-rows: repeat(3, auto);
+  grid-template-columns: repeat(3, minmax(260px, 1fr));
   padding: 20px;
-  border-radius: 25px;
+  gap: 50px;
 }
 .sudo-aside {
-  width: 20%;
-  min-width: 260px;
+  display: inline-block;
+  background-color: #e2e7ed;
+  padding: 20px;
+  border-radius: 3px;
 }
 .sudo-aside__group:not(:last-child) {
   margin-bottom: 40px;
@@ -950,13 +952,13 @@ h2.game span {
 .sudo-aside__group h2 {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
-  color: #3ea8b6;
+  color: #73a1d0;
   font-size: clamp(1.2rem, 2vw, 2rem);
   margin-bottom: 10px;
 }
 .sudo-aside__group ul li {
   font-family: Arial, Helvetica, sans-serif;
-  color: #3ea8b6;
+  color: #73a1d0;
   color: #6C6C6C;
   font-size: clamp(1rem, 1.3vw, 1.2rem);
   margin-bottom: 12px;
@@ -964,18 +966,18 @@ h2.game span {
 .sudo-aside__group--disabled {
   opacity: 0.5;
 }
-.sudo-aside .user-info {
+.user-info {
   display: none;
 }
-.sudo-aside .user-info--show {
+.user-info--show {
   display: block;
 }
-.sudo-aside .user-info .username {
-  color: #e4b50b;
+.user-info .username {
+  color: #63c3e6;
 }
-.sudo-aside .user-info .userpoints {
+.user-info .userpoints {
   font-family: Arial, Helvetica, sans-serif;
-  color: #3ea8b6;
+  color: #73a1d0;
   color: #6C6C6C;
   font-size: clamp(1rem, 1.3vw, 1.2rem);
 }
@@ -988,7 +990,7 @@ h2.game span {
 }
 .sudo-ranking__posicion {
   padding: 7px;
-  border-radius: 5px;
+  border-radius: 3px;
   background-color: #E2E8E9;
   color: #6C6C6C;
   width: 22px;
@@ -999,7 +1001,7 @@ h2.game span {
   color: #6C6C6C;
 }
 .sudo-ranking__puntos {
-  color: #3ea8b6;
+  color: #73a1d0;
 }
 .sudo-footer {
   display: flex;
@@ -1011,30 +1013,30 @@ h2.game span {
 .sudo-button {
   border: 0;
   outline: none;
-  border-radius: 15px;
+  border-radius: 3px;
   padding: 10px 20px;
   font-family: monospace;
   cursor: pointer;
   animation: all 0.3s ease-in-out;
 }
 .sudo-button--filled {
-  background-color: #3ea8b6;
+  background-color: #73a1d0;
   color: white;
 }
 .sudo-button--bubble {
-  border: 1px solid #3ea8b6;
+  border: 1px solid #73a1d0;
   background-color: transparent;
-  color: #3ea8b6;
+  color: #73a1d0;
   transition: all 0.2s ease-in-out;
 }
 .sudo-button--bubble:hover {
-  border: 1px solid #3ea8b6;
-  background-color: #3ea8b6;
+  border: 1px solid #73a1d0;
+  background-color: #73a1d0;
   color: white;
 }
 .sudo-button--bubble-active {
-  border: 1px solid #e4b50b;
-  background-color: #e4b50b;
+  border: 1px solid #63c3e6;
+  background-color: #63c3e6;
   color: white;
 }
 .sudo-button--width100 {
@@ -1066,14 +1068,14 @@ h2.game span {
   box-shadow: 0px 0px 2.9px rgba(0, 0, 0, 0.024), 0px 0px 13.9px rgba(0, 0, 0, 0.035), 0px 0px 34.4px rgba(0, 0, 0, 0.046), 0px 0px 86px rgba(0, 0, 0, 0.07);
   position: relative;
   min-width: 280px;
-  border-radius: 20px;
+  border-radius: 3px;
   background-color: white;
   padding: 35px 25px;
 }
 .sudo-modal__title {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
-  color: #3ea8b6;
+  color: #73a1d0;
   font-size: clamp(1.1rem, 1.5vw, 1.6rem);
   margin-bottom: 10px;
   margin-bottom: 30px;
@@ -1088,7 +1090,7 @@ h2.game span {
   cursor: pointer;
 }
 .sudo-modal__close:hover {
-  color: #3ea8b6;
+  color: #73a1d0;
 }
 .sudo-modal__form {
   display: flex;
@@ -1098,14 +1100,14 @@ h2.game span {
 .sudo-modal__input {
   border: 0;
   outline: 0;
-  border-bottom: 1px solid #3ea8b6;
+  border-bottom: 1px solid #73a1d0;
   padding: 5px;
 }
 .sudo-modal .level,
 .sudo-modal .multiplicador,
 .sudo-modal .time,
 .sudo-modal .puntos {
-  color: #3ea8b6;
+  color: #73a1d0;
 }
 .sudo-tips {
   list-style-type: none;
@@ -1117,26 +1119,26 @@ h2.game span {
 .sudo-tip__title {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
-  color: #3ea8b6;
+  color: #73a1d0;
   font-size: clamp(1.2rem, 2vw, 2rem);
   margin-bottom: 10px;
   counter-increment: css-counter 1;
 }
 .sudo-tip__title:before {
-  color: #24808c;
+  color: #5a80a7;
   content: counter(css-counter) " - ";
 }
 .sudo-tip__text {
   font-family: Arial, Helvetica, sans-serif;
-  color: #3ea8b6;
+  color: #73a1d0;
   color: #6C6C6C;
   font-size: clamp(1rem, 1.3vw, 1.2rem);
 }
 .sudo-tutoriales h1 {
   text-align: center;
   font-size: 72px;
-  background: #3ea8b6;
-  background: linear-gradient(45deg, #24808c 0%, #3ea8b6 100%);
+  background: #73a1d0;
+  background: linear-gradient(45deg, #5a80a7 0%, #73a1d0 100%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -1149,9 +1151,9 @@ h2.game span {
 }
 .sudo-tutoriales__video {
   width: 300px;
-  background-color: #d9f6fa;
+  background-color: #e2e7ed;
   padding: 20px;
-  border-radius: 25px;
+  border-radius: 3px;
 }
 .sudo-tutoriales__video:hover {
   box-shadow: 0px 0px 2.9px rgba(0, 0, 0, 0.024), 0px 0px 13.9px rgba(0, 0, 0, 0.035), 0px 0px 34.4px rgba(0, 0, 0, 0.046), 0px 0px 86px rgba(0, 0, 0, 0.07);
@@ -1159,13 +1161,13 @@ h2.game span {
 .sudo-tutoriales__video iframe {
   width: 100%;
   border: 0;
-  border-radius: 5px;
+  border-radius: 3px;
   margin-bottom: 10px;
 }
 .sudo-tutoriales__video h3 {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
-  color: #3ea8b6;
+  color: #73a1d0;
   font-size: clamp(1.1rem, 1.5vw, 1.6rem);
   margin-bottom: 10px;
 }
@@ -1240,7 +1242,7 @@ a {
   font-size: clamp(1rem, 1.3vw, 1.2rem);
 }
 .sudo-info__level span {
-  color: #3ea8b6;
+  color: #73a1d0;
   font-weight: 600;
 }
 .sudo-info__timer {
@@ -1249,4 +1251,19 @@ a {
 .sudo-info__fallos {
   color: #6C6C6C;
   font-size: 14px;
+}
+main {
+  grid-row: 1/-1;
+}
+.sudo-nav {
+  grid-row: 1/-1;
+}
+.user-info {
+  grid-row: 1/2;
+}
+.ranking {
+  grid-row: 2/4;
+}
+.ranking--full {
+  grid-row: 1/-1;
 }
