@@ -193,17 +193,50 @@ setTimeout(function () {
   }
 
   function handleSelectionOfCell(cell) {
-    // Clear previous selection
-    const prevSelectedCell = document.querySelectorAll(".selected-cell");
-    prevSelectedCell.forEach(cell => cell.classList.remove("selected-cell"));
-
-    // Highlight current selection
-    cell.classList.add("selected-cell");
-
-    // TODO: Add highlighting of same row and same column cells
 
     // Assign new selection
     selectedCell = cell;
+
+    // Helper obj
+    const positions = {
+      1: [0, 1, 2],
+      2: [0, 1, 2],
+      3: [0, 1, 2],
+      4: [3, 4, 5],
+      5: [3, 4, 5],
+      6: [3, 4, 5],
+      7: [6, 7, 8],
+      8: [6, 7, 8],
+      9: [6, 7, 8],
+    };
+
+    // Clear all prev classes
+    const allCells = Array.from(document.querySelectorAll(`#sudo_gameplate td div`))
+    allCells.forEach((cell)=> cell.classList.remove("selected-cell","highlighted-cell","same-num-cell"))
+
+    // Get cells to highlight
+    const sameRowCells = cell.parentNode.parentNode.querySelectorAll('td div');
+    const positionOfCell = Array.from(sameRowCells).indexOf(cell) + 1;
+    const sameColumnsCells = document.querySelectorAll(`#sudo_gameplate tr td:nth-child(${positionOfCell}) div`);
+
+    const allRows = document.querySelectorAll('#sudo_gameplate tr')
+    const selectedRow = cell.parentNode.parentNode
+    const positionOfRow = Array.from(allRows).indexOf(selectedRow) + 1;
+
+    const thisSquareCells = allCells.filter(ce =>
+      positions[positionOfRow].includes(parseInt(ce.dataset.x)) &&
+      positions[positionOfCell].includes(parseInt(ce.dataset.y))
+    )
+
+    const allHiglightsCell = [...sameRowCells, ...sameColumnsCells, ...thisSquareCells]
+
+    // Get cells with same number, not empty, and not the selected one
+    const sameNunCells = allCells.filter(ce => ce.textContent === cell.textContent && ce.textContent !== "" && ce !== cell)
+
+    // Add classes
+    cell.classList.add("selected-cell"); // Highlight SELECTED cell
+    allHiglightsCell.forEach(node => node.classList.add("highlighted-cell")); // Highlight HIGHLITED cells
+    sameNunCells.forEach(cell =>  cell.classList.add("same-num-cell"));   // Highlight SAME-NUM cells
   }
 
   function handleFailCount() {
@@ -279,7 +312,6 @@ setTimeout(function () {
 
     return points;
   }
-
 
   function handleSudokuOK() {
     pauseTimer();
@@ -363,11 +395,7 @@ setTimeout(function () {
 
   // Use on-screen keyboard
   const keys = document.querySelectorAll(".sudo-keyboard__key");
-  keys.forEach(key =>
-    key.addEventListener("click", e => handleNumberInput(e, key)),
-  );
-
-  // window.addEventListener("keyup", e => {
+  keys.forEach(key => key.addEventListener("click", e => handleNumberInput(e, key)));
 
 
   window.addEventListener("keyup", e => {
