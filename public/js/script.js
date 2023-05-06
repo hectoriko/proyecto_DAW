@@ -197,10 +197,19 @@ setTimeout(function () {
     const prevSelectedCell = document.querySelectorAll(".selected-cell");
     prevSelectedCell.forEach(cell => cell.classList.remove("selected-cell"));
 
+    // Clear previous highlighted cells
+    const prevHighlightedCell = document.querySelectorAll(".highlighted-cell");
+    prevHighlightedCell.forEach(cell => cell.classList.remove("highlighted-cell"));
+
+    const sameRowCells = cell.parentNode.parentNode.querySelectorAll('td div');
+    const positionOfCell = Array.from(sameRowCells).indexOf(cell) + 1;
+    const sameColumnsCells = document.querySelectorAll(`#sudo_gameplate tr td:nth-child(${positionOfCell}) div`);
+
     // Highlight current selection
     cell.classList.add("selected-cell");
-
-    // TODO: Add highlighting of same row and same column cells
+    // Highlight same row and columns
+    sameRowCells.forEach(node => node.classList.add("highlighted-cell"));
+    sameColumnsCells.forEach(node => node.classList.add("highlighted-cell"));
 
     // Assign new selection
     selectedCell = cell;
