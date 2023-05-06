@@ -49,14 +49,6 @@ router.post('/login', (req, res) => {
   });
 });
 
-/* Ruta para cerrar sesión de usuario */
-// router.get('/logout', auth, function(req, res) {
-//   req.user.deleteToken(req.token, (err, _user) => {
-//     if (err) return res.status(400).send(err);
-//     res.sendStatus(200);
-//   });
-// });
-
 router.post('/logout', (req, res) => {
   const token = req.cookies.auth;
   User.findByToken(token, (err, user) => {
@@ -115,16 +107,6 @@ router.post('/register', (req, res) => {
   });
 });
 
-/* Ruta a todos los usuarios */
-// router.get('/getUsers', async (req, res) => {
-//     try {
-//         let users = await User.find();
-//         res.json(users);
-//     } catch(err) {
-//         res.status(500).json({message: err.message});
-//     }
-// });
-
 /* Ruta a todos los por orden de puntos */
 router.get('/getRanking', async (req, res) => {
   try {
@@ -141,6 +123,44 @@ router.get('/getRanking', async (req, res) => {
       res.status(500).json({message: err.message});
   }
 });
+
+const getUserInfo = (req, res, next) => {
+  const token = req.cookies.auth;
+  if (!token) {
+    return res.json({
+      isAuth: false,
+      message: 'No se encontró cookie de autenticación'
+    });
+  }
+  User.findByToken(token, (err, user) => {
+    if (err) return res(err);
+    if (!user) {
+      return res.json({
+        isAuth: false,
+        message: 'No se encontró usuario con el token de autenticación proporcionado'
+      });
+    }
+    res.json({
+      isAuth: true,
+      id: user._id,
+      username: user.username,
+      userpoints: user.points
+    });
+  });
+};
+
+router.get('/user', getUserInfo, (req, res) => {
+  // The user information is available in the response object
+  const { isAuth, id, username, userpoints } = res.locals;
+  res.json({
+    isAuth,
+    id,
+    username,
+    userpoints
+  });
+});
+
+
 
 /* EXPORTS */
 module.exports = router;

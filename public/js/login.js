@@ -1,6 +1,14 @@
 import { showModal, hideModal } from "./modal.js";
 
 
+async function isLoggedIn() {
+  await fetch(`/auth/user/`)
+    .then(response => response.json())
+    .then(result => handleLoginOK(result))
+    .catch(e => console.error(e));
+}
+isLoggedIn()
+
 export function handleRegister() {
   const username = document.querySelector(".js-modal-register .js-user").value;
   const password = document.querySelector(".js-modal-register .js-password").value;
@@ -33,6 +41,38 @@ export function handleRegister() {
   .catch(error => console.log('error', error));
 }
 
+function handleLoginOK(result) {
+  document.querySelector('.user-info').classList.add('user-info--show');
+      // const user = JSON.parse(result)
+      let user;
+      try {user = JSON.parse(result);}
+      catch(e) {user = result;}
+      // console.log("🚀 ~ user", user)
+
+      // const username = document.querySelector(".js-modal-login .js-user").value;
+      // const username = user.username
+
+      // if (username !== '') {
+      if (user) {
+        document.querySelector('.username').textContent = user.username;
+        document.querySelector('.username').setAttribute('data-userId', user.id);
+        document.querySelector('.userpoints').textContent = `Tus puntos: ${user.userpoints} pts`;
+
+        document.querySelector('.js-login').classList.add('hidden');
+        document.querySelector('.js-login').classList.remove('shown');
+
+        document.querySelector('.js-logout').classList.add('shown');
+        document.querySelector('.js-logout').classList.remove('hidden');
+
+        document.querySelector('.ranking').classList.remove("ranking--full")
+      }
+
+      setTimeout(() => {
+        const loginModal = document.querySelector(".js-modal-login");
+        hideModal(loginModal);
+      }, 1500)
+}
+
 export function handleLogin() {
   const username = document.querySelector(".js-modal-login .js-user").value;
   const password = document.querySelector(".js-modal-login .js-password").value;
@@ -50,28 +90,7 @@ export function handleLogin() {
 
   fetch("/auth/login", requestOptions)
     .then(response => response.text())
-    .then(result => {
-      document.querySelector('.user-info').classList.add('user-info--show');
-      const user = JSON.parse(result)
-      if (username !== '') {
-        document.querySelector('.username').textContent = user.username;
-        document.querySelector('.username').setAttribute('data-userId', user.id);
-        document.querySelector('.userpoints').textContent = `Tus puntos: ${user.userpoints} pts`;
-
-        document.querySelector('.js-login').classList.add('hidden');
-        document.querySelector('.js-login').classList.remove('shown');
-
-        document.querySelector('.js-logout').classList.add('shown');
-        document.querySelector('.js-logout').classList.remove('hidden');
-      }
-
-      document.querySelector('.ranking').classList.remove("ranking--full")
-
-      setTimeout(() => {
-        const loginModal = document.querySelector(".js-modal-login");
-        hideModal(loginModal);
-      }, 1500)
-    })
+    .then(result => handleLoginOK(result))
     .catch(error => console.log('error', error));
   }
 
