@@ -1,5 +1,38 @@
 import { showModal, hideModal } from "./modal.js";
 
+
+export function handleRegister() {
+  const username = document.querySelector(".js-modal-register .js-user").value;
+  const password = document.querySelector(".js-modal-register .js-password").value;
+  const email = document.querySelector(".js-modal-register .js-email").value;
+  const points = 0;
+  // console.log({ username, password });
+
+  var myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+  // myHeaders.append("Cookie", "auth=eyJhbGciOiJIUzI1NiJ9.NjQzY2RmZmRmMmI5ZGE1ODEzODUzYTkw.PvZ1uMewI1NhnrU-ZZ0feuYJCYWCyUa09o-cIPBbENc");
+  
+  var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: JSON.stringify({ username, password, email, points }),
+    redirect: 'follow'
+  };
+  
+  fetch("/auth/register", requestOptions)
+  .then(response => response.text())
+  .then(result => {
+    const loginRegistroOk = document.querySelector(".js-modal-register-ok");
+    const registerModal = document.querySelector(".js-modal-register");
+    
+    hideModal(registerModal);
+
+    setTimeout(() => { showModal(loginRegistroOk) }, 1000)
+    setTimeout(() => { hideModal(loginRegistroOk) }, 4000)
+  })
+  .catch(error => console.log('error', error));
+}
+
 export function handleLogin() {
   const username = document.querySelector(".js-modal-login .js-user").value;
   const password = document.querySelector(".js-modal-login .js-password").value;
@@ -32,6 +65,8 @@ export function handleLogin() {
         document.querySelector('.js-logout').classList.remove('hidden');
       }
 
+      document.querySelector('.ranking').classList.remove("ranking--full")
+
       setTimeout(() => {
         const loginModal = document.querySelector(".js-modal-login");
         hideModal(loginModal);
@@ -39,45 +74,13 @@ export function handleLogin() {
     })
     .catch(error => console.log('error', error));
   }
-  
-  export function handleRegister() {
-    const username = document.querySelector(".js-modal-register .js-user").value;
-    const password = document.querySelector(".js-modal-register .js-password").value;
-    const email = document.querySelector(".js-modal-register .js-email").value;
-    const points = 0;
-    // console.log({ username, password });
-    
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-    // myHeaders.append("Cookie", "auth=eyJhbGciOiJIUzI1NiJ9.NjQzY2RmZmRmMmI5ZGE1ODEzODUzYTkw.PvZ1uMewI1NhnrU-ZZ0feuYJCYWCyUa09o-cIPBbENc");
-    
-    var requestOptions = {
-      method: 'POST',
-      headers: myHeaders,
-      body: JSON.stringify({ username, password, email, points }),
-      redirect: 'follow'
-    };
-    
-    fetch("/auth/register", requestOptions)
-    .then(response => response.text())
-    .then(result => {
-      const loginRegistroOk = document.querySelector(".js-modal-register-ok");
-      const registerModal = document.querySelector(".js-modal-register");
-      
-      hideModal(registerModal);
-      
-      setTimeout(() => { showModal(loginRegistroOk) }, 1000)
-      setTimeout(() => { hideModal(loginRegistroOk) }, 4000)
-    })
-    .catch(error => console.log('error', error));
-  }
-  
+
   export function handleLogout() {
     var requestOptions = {
       method: 'POST',
       redirect: 'follow'
     };
-    
+
     fetch("/auth/logout", requestOptions)
     .then(response => response.text())
     .then(result => {
@@ -91,10 +94,12 @@ export function handleLogin() {
 
       document.querySelector('.username').textContent = '';
       document.querySelector('.username').removeAttribute('data-userId');
-      document.querySelector('.userPoints').textContent = '';
+      document.querySelector('.userpoints').textContent = '';
       document.querySelector('.user-info').classList.remove('user-info--show');
+
+      document.querySelector('.ranking').classList.add("ranking--full")
     })
-    .catch(error => console.error(err));
+    .catch(error => console.error(error));
   }
 
 
