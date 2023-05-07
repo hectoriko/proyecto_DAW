@@ -3,15 +3,14 @@ import { loadYoutubeTutorials } from "./youtube_tutorials.js";
 import { handleLogin } from "./login.js";
 import { showModal, hideModal } from "./modal.js";
 
-
 // const addTemplate = require('./insert_templates.js');
 
 async function getRanking() {
   await fetch(`/auth/getRanking/`)
     .then(response => response.json())
     .then(data => {
-      populateRanking(data)
-      return data
+      populateRanking(data);
+      return data;
     })
     .catch(e => console.error(e));
 }
@@ -22,32 +21,32 @@ export function updatePoints(points) {
   myHeaders.append("Content-Type", "application/json");
 
   var requestOptions = {
-    method: 'POST',
+    method: "POST",
     headers: myHeaders,
     body: JSON.stringify({ points }),
-    redirect: 'follow'
+    redirect: "follow",
   };
 
   fetch(`/auth/updatePoints`, requestOptions)
     .then(response => response.text())
     .then(result => console.log(result))
-    .catch(error => console.log('error', error));
+    .catch(error => console.log("error", error));
 }
 
 function populateRanking(ranking) {
   const rankingWrapper = document.querySelector(".sudo-ranking");
   const rankingLength = 3;
-  let template = '';
+  let template = "";
 
-  rankingWrapper.innerHTML = '';
+  rankingWrapper.innerHTML = "";
   ranking.forEach((user, i) => {
     if (i >= rankingLength) return;
-    template += /*html*/`
+    template += /*html*/ `
     <li class="sudo-ranking__user" data-userId='${user._id}'>
       <span class="sudo-ranking__posicion">${++i}</span>
       <span class="sudo-ranking__nombre">${user.username}</span>
       <span class="sudo-ranking__puntos">${user.points} pts</span>
-    </li>`
+    </li>`;
   });
   rankingWrapper.innerHTML = template;
 }
@@ -89,27 +88,30 @@ setTimeout(function () {
   }
 
   function preloadSudoku(levelParam) {
+    updateFailCount(0);
 
-    updateFailCount(0)
+    const chosenLvl = levelParam || "easy";
 
-    const chosenLvl =  levelParam || 'easy';
+    const activeButton = document.querySelector(".sudo-button--bubble-active");
+    if (activeButton)
+      activeButton.classList.remove("sudo-button--bubble-active");
 
-    const activeButton = document.querySelector(".sudo-button--bubble-active")
-    if (activeButton) activeButton.classList.remove("sudo-button--bubble-active");
-
-    const levelButton = document.querySelector(`.js-levels .js-button-lvl[data-level='${chosenLvl}']`);
+    const levelButton = document.querySelector(
+      `.js-levels .js-button-lvl[data-level='${chosenLvl}']`,
+    );
     // Mark button as active
     levelButton.classList.add("sudo-button--bubble-active");
 
     // Show current level
-    document.querySelector(".sudo-info__level span").textContent =  levelButton.textContent;
+    document.querySelector(".sudo-info__level span").textContent =
+      levelButton.textContent;
 
     // Start timer
     // startTimer();
 
     const level = levelButton.dataset.level;
     callSudokuApi(level);
-  };
+  }
 
   function callSudokuApi(level) {
     fetch(`/api/getRandom/${level}`)
@@ -193,7 +195,6 @@ setTimeout(function () {
   }
 
   function handleSelectionOfCell(cell) {
-
     // Assign new selection
     selectedCell = cell;
 
@@ -211,32 +212,52 @@ setTimeout(function () {
     };
 
     // Clear all prev classes
-    const allCells = Array.from(document.querySelectorAll(`#sudo_gameplate td div`))
-    allCells.forEach((cell)=> cell.classList.remove("selected-cell","highlighted-cell","same-num-cell"))
+    const allCells = Array.from(
+      document.querySelectorAll(`#sudo_gameplate td div`),
+    );
+    allCells.forEach(cell =>
+      cell.classList.remove(
+        "selected-cell",
+        "highlighted-cell",
+        "same-num-cell",
+      ),
+    );
 
     // Get cells to highlight
-    const sameRowCells = cell.parentNode.parentNode.querySelectorAll('td div');
+    const sameRowCells = cell.parentNode.parentNode.querySelectorAll("td div");
     const positionOfCell = Array.from(sameRowCells).indexOf(cell) + 1;
-    const sameColumnsCells = document.querySelectorAll(`#sudo_gameplate tr td:nth-child(${positionOfCell}) div`);
+    const sameColumnsCells = document.querySelectorAll(
+      `#sudo_gameplate tr td:nth-child(${positionOfCell}) div`,
+    );
 
-    const allRows = document.querySelectorAll('#sudo_gameplate tr')
-    const selectedRow = cell.parentNode.parentNode
+    const allRows = document.querySelectorAll("#sudo_gameplate tr");
+    const selectedRow = cell.parentNode.parentNode;
     const positionOfRow = Array.from(allRows).indexOf(selectedRow) + 1;
 
-    const thisSquareCells = allCells.filter(ce =>
-      positions[positionOfRow].includes(parseInt(ce.dataset.x)) &&
-      positions[positionOfCell].includes(parseInt(ce.dataset.y))
-    )
+    const thisSquareCells = allCells.filter(
+      ce =>
+        positions[positionOfRow].includes(parseInt(ce.dataset.x)) &&
+        positions[positionOfCell].includes(parseInt(ce.dataset.y)),
+    );
 
-    const allHiglightsCell = [...sameRowCells, ...sameColumnsCells, ...thisSquareCells]
+    const allHiglightsCell = [
+      ...sameRowCells,
+      ...sameColumnsCells,
+      ...thisSquareCells,
+    ];
 
     // Get cells with same number, not empty, and not the selected one
-    const sameNunCells = allCells.filter(ce => ce.textContent === cell.textContent && ce.textContent !== "" && ce !== cell)
+    const sameNunCells = allCells.filter(
+      ce =>
+        ce.textContent === cell.textContent &&
+        ce.textContent !== "" &&
+        ce !== cell,
+    );
 
     // Add classes
     cell.classList.add("selected-cell"); // Highlight SELECTED cell
     allHiglightsCell.forEach(node => node.classList.add("highlighted-cell")); // Highlight HIGHLITED cells
-    sameNunCells.forEach(cell =>  cell.classList.add("same-num-cell"));   // Highlight SAME-NUM cells
+    sameNunCells.forEach(cell => cell.classList.add("same-num-cell")); // Highlight SAME-NUM cells
   }
 
   function handleFailCount() {
@@ -256,7 +277,7 @@ setTimeout(function () {
     else {
       selectedCell.classList.add("is-wrong");
       failCount++;
-      updateFailCount(failCount)
+      updateFailCount(failCount);
       handleFailCount();
     }
     // TODO: Add no-way class
@@ -287,25 +308,29 @@ setTimeout(function () {
 
   function calculatePoints(level, timeTaken, multiplier) {
     // Max points that can be earned according to difficulty
-    const maxPoints = level === "easy"
-    ? 500
-    : level === "medium"
-    ? 1000
-    : level === "hard"
-    ? 2000
-    : 0; // 0 as fallback
+    const maxPoints =
+      level === "easy"
+        ? 500
+        : level === "medium"
+        ? 1000
+        : level === "hard"
+        ? 2000
+        : 0; // 0 as fallback
 
     // Time it should take according to difficulty
-    const referenceTime = level === "easy"
-    ? 60 * 5 // 10 minutes for easy
-    : level === "medium"
-    ? 60 * 10 // 20 minutes for medium
-    : level === "hard"
-    ? 60 * 20 // 30 minutes for hard
-    : 60 * 60; // 60 minutes as fallback
+    const referenceTime =
+      level === "easy"
+        ? 60 * 5 // 10 minutes for easy
+        : level === "medium"
+        ? 60 * 10 // 20 minutes for medium
+        : level === "hard"
+        ? 60 * 20 // 30 minutes for hard
+        : 60 * 60; // 60 minutes as fallback
 
     // calculate the points based on the time taken and the multiplier
-    let points = Math.round((maxPoints / ((timeTaken + 1) / (referenceTime + 1))) * multiplier);
+    let points = Math.round(
+      (maxPoints / ((timeTaken + 1) / (referenceTime + 1))) * multiplier,
+    );
 
     // ensure that the points value is not greater than maxPoints
     if (points > maxPoints) points = maxPoints;
@@ -325,29 +350,29 @@ setTimeout(function () {
       .querySelector(".sudo-button--bubble-active")
       .getAttribute("data-level");
 
-      // Adjust multipler according to difficulty
-      const multiplier =
+    // Adjust multipler according to difficulty
+    const multiplier =
       level === "easy"
-      ? 1
-      : level === "medium"
-      ? 1.5
-      : level === "hard"
-      ? 2
-      : 0;
+        ? 1
+        : level === "medium"
+        ? 1.5
+        : level === "hard"
+        ? 2
+        : 0;
 
-      const points = calculatePoints(level, timeTaken, multiplier)
-      updatePoints(points)
+    const points = calculatePoints(level, timeTaken, multiplier);
+    updatePoints(points);
 
-      setTimeout(() => {
-        getRanking();
-      }, 1000);
+    setTimeout(() => {
+      getRanking();
+    }, 1000);
 
-        const sudokuOkModal = document.querySelector(".js-modal-sudoku-ok");
+    const sudokuOkModal = document.querySelector(".js-modal-sudoku-ok");
 
-        sudokuOkModal.querySelector(".level").textContent = level
-        sudokuOkModal.querySelector(".multiplicador").textContent = multiplier
-        sudokuOkModal.querySelector(".time").textContent = time
-        sudokuOkModal.querySelector(".puntos").textContent = points
+    sudokuOkModal.querySelector(".level").textContent = level;
+    sudokuOkModal.querySelector(".multiplicador").textContent = multiplier;
+    sudokuOkModal.querySelector(".time").textContent = time;
+    sudokuOkModal.querySelector(".puntos").textContent = points;
 
     showModal(sudokuOkModal);
   }
@@ -369,8 +394,7 @@ setTimeout(function () {
 
       // Reset failure count
       // failCount = 0;
-      updateFailCount(0)
-
+      updateFailCount(0);
 
       // Reset timer & Start timer
       // resetTimer();
@@ -391,20 +415,18 @@ setTimeout(function () {
 
   // Use physical keyboard to input numbers
 
-
-
   // Use on-screen keyboard
   const keys = document.querySelectorAll(".sudo-keyboard__key");
-  keys.forEach(key => key.addEventListener("click", e => handleNumberInput(e, key)));
-
+  keys.forEach(key =>
+    key.addEventListener("click", e => handleNumberInput(e, key)),
+  );
 
   window.addEventListener("keyup", e => {
-
-    const modals = document.querySelectorAll(".sudo-modal")
+    const modals = document.querySelectorAll(".sudo-modal");
     let modalIsOpen = false;
     modals.forEach(modal => {
       if (modal.classList.contains("sudo-modal--active")) modalIsOpen = true;
-    })
+    });
 
     if (modalIsOpen) return;
 
@@ -432,13 +454,9 @@ setTimeout(function () {
   //     timerRef.innerHTML = "00 : 00 : 00 : 000 ";
   //   });
 
-
   // Load first sudoku
 
-
-  preloadSudoku()
-
-
+  preloadSudoku();
 
   const closeGameOverModal = document.querySelector(
     ".js-modal-game-over .js-close-modal",
@@ -450,7 +468,6 @@ setTimeout(function () {
     hideModal(gameOverModal);
 
     setTimeout(() => preloadSudoku(), 500);
-
   });
 
   const closeSudokuOkModal = document.querySelector(
@@ -462,15 +479,19 @@ setTimeout(function () {
 
     hideModal(sudokuOkModal);
 
-    const activeLevel =  document
-    .querySelector(".sudo-button--bubble-active")
-    .getAttribute("data-level");
+    const activeLevel = document
+      .querySelector(".sudo-button--bubble-active")
+      .getAttribute("data-level");
 
-    let nextLevel = '';
-    activeLevel === "easy" ? nextLevel = "medium" : activeLevel === "medium" ? nextLevel = "hard" : activeLevel === "hard" ? nextLevel = "hard" : "easy"
+    let nextLevel = "";
+    activeLevel === "easy"
+      ? (nextLevel = "medium")
+      : activeLevel === "medium"
+      ? (nextLevel = "hard")
+      : activeLevel === "hard"
+      ? (nextLevel = "hard")
+      : "easy";
 
     setTimeout(() => preloadSudoku(nextLevel), 500);
-
   });
-
 }, 2000);
