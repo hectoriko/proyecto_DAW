@@ -107,6 +107,16 @@ router.post('/register', (req, res) => {
   });
 });
 
+/* Ruta a todos los usuarios */
+router.get('/getUsers', async (req, res) => {
+  try {
+      let users = await User.find();
+      res.json(users);
+  } catch(err) {
+      res.status(500).json({message: err.message});
+  }
+});
+
 /* Ruta a todos los por orden de puntos */
 router.get('/getRanking', async (req, res) => {
   try {

@@ -2,14 +2,15 @@
 @import './_mixins.less';
 
 .sudo-middle {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	display: grid;
-	grid-template-rows: repeat(3, auto);
-	grid-template-columns: repeat(3, minmax(260px, 1fr));
 	padding: 20px;
-	gap: 50px
+
+	&--grid {
+		display: grid;
+		grid-template-rows: repeat(3, auto);
+		grid-template-columns: repeat(3, minmax(260px, 1fr));
+		padding: 20px;
+		gap: 25px 50px
+	}
 }
 
 .sudo-aside {
@@ -71,8 +72,10 @@
    &__posicion {
 		padding: 7px;
 		border-radius: @radius;
-		background-color: @gray;
+		background-color: @accent-color;
 		color: @gray-6c;
+		color: white;
+		font-weight: bold;
 		width: 22px;
 		height: 22px;
 		line-height: 10px;
