@@ -11,6 +11,7 @@
     "serve": "browser-sync app.js -w",
     "start": "nodemon server.js",
     "server": "node server.js",
+    "less": "lessc ./public/css/input/main.less ./public/css/output/main.css",
     "watchless": "less-watch-compiler ./public/css/input ./public/css/output"
   },
   "repository": {
