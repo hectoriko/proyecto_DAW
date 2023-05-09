@@ -1,25 +1,23 @@
 import { showModal, hideModal } from "./modal.js";
 
-async function isLoggedIn() {
+export async function isLoggedIn() {
   await fetch(`/auth/user/`)
     .then(response => response.json())
     .then(result => handleLoginOK(result))
     .catch(e => console.error(e));
 }
-isLoggedIn();
 
-export function handleRegister() {
+
+export async function handleRegister() {
   const username = document.querySelector(".js-modal-register .js-user").value;
   const password = document.querySelector(
     ".js-modal-register .js-password",
   ).value;
   const email = document.querySelector(".js-modal-register .js-email").value;
   const points = 0;
-  // console.log({ username, password });
 
   var myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
-  // myHeaders.append("Cookie", "auth=eyJhbGciOiJIUzI1NiJ9.NjQzY2RmZmRmMmI5ZGE1ODEzODUzYTkw.PvZ1uMewI1NhnrU-ZZ0feuYJCYWCyUa09o-cIPBbENc");
 
   var requestOptions = {
     method: "POST",
@@ -28,7 +26,7 @@ export function handleRegister() {
     redirect: "follow",
   };
 
-  fetch("/auth/register", requestOptions)
+  await fetch("/auth/register", requestOptions)
     .then(response => response.text())
     .then(result => {
       const loginRegistroOk = document.querySelector(".js-modal-register-ok");
@@ -47,7 +45,10 @@ export function handleRegister() {
 }
 
 function handleLoginOK(result) {
-  document.querySelector(".user-info").classList.add("user-info--show");
+  const userinfo = document.querySelector(".user-info");
+  if (!userinfo) return
+
+  userinfo.classList.add("user-info--show");
   // const user = JSON.parse(result)
   let user;
   try {
@@ -83,15 +84,14 @@ function handleLoginOK(result) {
   }, 1500);
 }
 
-export function handleLogin() {
+export function callLogin() {
   const username = document.querySelector(".js-modal-login .js-user").value;
   const password = document.querySelector(".js-modal-login .js-password").value;
 
   var myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
-  // myHeaders.append("Cookie", "auth=eyJhbGciOiJIUzI1NiJ9.NjQzY2RmZmRmMmI5ZGE1ODEzODUzYTkw.PvZ1uMewI1NhnrU-ZZ0feuYJCYWCyUa09o-cIPBbENc");
 
-  var requestOptions = {
+  const requestOptions = {
     method: "POST",
     headers: myHeaders,
     body: JSON.stringify({ username, password }),
@@ -139,40 +139,46 @@ setTimeout(() => {
     showModal(loginModal);
   });
 
-  const closeLoginModal = document.querySelector(
-    ".js-modal-login .js-close-modal",
-  );
-  closeLoginModal.addEventListener("click", function () {
-    const loginModal = document.querySelector(".js-modal-login");
-    hideModal(loginModal);
-  });
+  const closeLoginModal = document.querySelector(".js-modal-login .js-close-modal");
+  if (closeLoginModal) {
+    closeLoginModal.addEventListener("click", function () {
+      const loginModal = document.querySelector(".js-modal-login");
+      hideModal(loginModal);
+    });
+  }
 
   const sendLogin = document.querySelector(".js-send-login");
-  sendLogin.addEventListener("click", function (e) {
-    e.preventDefault();
-    handleLogin();
-  });
+  if (sendLogin) {
+    sendLogin.addEventListener("click", function (e) {
+      e.preventDefault();
+      callLogin();
+    });
+  }
 
   // REGISTER
   const openRegisterModal = document.querySelector(".js-open-register-modal");
-  openRegisterModal.addEventListener("click", function () {
-    const registerModal = document.querySelector(".js-modal-register");
-    showModal(registerModal);
-  });
+  if (openRegisterModal) {
+    openRegisterModal.addEventListener("click", function () {
+      const registerModal = document.querySelector(".js-modal-register");
+      showModal(registerModal);
+    });
+  }
 
-  const closeRegisterModal = document.querySelector(
-    ".js-modal-register .js-close-modal",
-  );
-  closeRegisterModal.addEventListener("click", function () {
-    const registerModal = document.querySelector(".js-modal-register");
-    hideModal(registerModal);
-  });
+  const closeRegisterModal = document.querySelector(".js-modal-register .js-close-modal");
+  if (closeRegisterModal) {
+    closeRegisterModal.addEventListener("click", function () {
+      const registerModal = document.querySelector(".js-modal-register");
+      hideModal(registerModal);
+    });
+  }
 
   const sendRegister = document.querySelector(".js-send-register");
-  sendRegister.addEventListener("click", function (e) {
-    e.preventDefault();
-    handleRegister();
-  });
+  if (sendRegister) {
+    sendRegister.addEventListener("click", function (e) {
+      e.preventDefault();
+      handleRegister();
+    });
+  }
 
   // LOGOUT
   const logout = document.querySelector(".js-logout");

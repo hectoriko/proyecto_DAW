@@ -1,11 +1,11 @@
 const tutorialesContainer = document.querySelector(".sudo-tutoriales");
-if (tutorialesContainer) loadYoutubeTutorials();
+
 
 /*
  * comentario
  * comentario...
  */
-export function loadYoutubeTutorials() {
+export async function loadYoutubeTutorials() {
   // Replace YOUR_API_KEY with your actual API key
   const API_KEY = "AIzaSyAhz0qKEbDMHbPL5dN0MhcunUTGvILvSeY";
 
@@ -19,6 +19,8 @@ export function loadYoutubeTutorials() {
 
   // Send the request
   request.onload = function () {
+    console.log('hey');
+
     if (request.status !== 200) {
       console.error("Error fetching videos");
       // TODO: Show error message
